@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="EmergencyApp.MainPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Add contacts"
+            Clicked="AddContacts_Clicked"
+            Priority="1"
+            Order="Primary"/>
+        <ToolbarItem
+            Text="About"
+            Clicked="About_Clicked"
+            Priority="2"
+            Order="Secondary"/>
+        <ToolbarItem
+            Text="Logout"
+            Clicked="ToolBar_Clicked"
+            Priority="3"
+            Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Frame IsVisible="{Binding FrameVisibility}" BackgroundColor="#d3d3d3" HasShadow="True">
+            <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Please wait" FontSize="Large"/>
+                <ActivityIndicator Grid.Row="1" HeightRequest="60" WidthRequest="60" Color="CornflowerBlue" x:Name="indicator" IsEnabled="True" IsRunning="True"/>
+            </Grid>
+        </Frame>
+        <Grid x:Name="parentGrid" BackgroundColor="Black">
+            <Button Text="S O S" TextColor="White"
+                    HorizontalOptions="Center" VerticalOptions="Center"
+                    BackgroundColor="Red" 
+                    FontSize="Large" 
+                    Margin="20,20,20,20" 
+                    CornerRadius="150" 
+                    HeightRequest="300" 
+                    WidthRequest="300" 
+                    Clicked="Button_Clicked" />
+        </Grid>
+    </Grid>
+</ContentPage>
