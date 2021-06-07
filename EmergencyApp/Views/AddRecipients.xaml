@@ -10,6 +10,7 @@
             <StackLayout Orientation="Horizontal">
                     <Label Text="Enter number with area code :" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
                     <Entry Completed="Entry_Completed" Keyboard="Telephone" x:Name="entry" HorizontalOptions="FillAndExpand"/>
+                <Button Text="Contacts" Clicked="Button_Clicked"/>
             </StackLayout>
             <Label x:Name="label" Margin="0,20,0,20" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
             <ListView ItemsSource="{Binding OrderList}"  Margin="10" ItemTapped="ListView_ItemTapped">
@@ -18,7 +19,7 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Recipients}" VerticalTextAlignment="Center" FontAttributes="Bold" VerticalOptions="CenterAndExpand" TextColor="Black"/>
+                                    <Label Text="{Binding Recipient}" VerticalTextAlignment="Center" FontAttributes="Bold" VerticalOptions="CenterAndExpand" TextColor="Black"/>
                                     <Label Text="Tap to delete" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" FontAttributes="Italic" HorizontalTextAlignment="End"/>
                                 </StackLayout>
                             </ViewCell.View>

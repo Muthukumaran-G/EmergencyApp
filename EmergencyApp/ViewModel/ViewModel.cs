@@ -72,9 +72,9 @@ namespace EmergencyApp
                 {
                     OrderList.Add(new RecipientModel()
                     {
-                        Recipients = recipientsTable.ToList().ToArray()[i].Recipients
+                        Recipient = recipientsTable.ToList().ToArray()[i].Recipient
                     });
-                    contactNames[i] = (recipientsTable.ToList().ToArray()[i].Recipients);
+                    contactNames[i] = (recipientsTable.ToList().ToArray()[i].Recipient);
                 }
 
                 var userTable = (from i in database.Table<User>() select i);

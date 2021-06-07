@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +13,7 @@ namespace EmergencyApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddRecipients : ContentPage
     {
+        ViewModel AddRecipientViewModel;
         public AddRecipients()
         {
             InitializeComponent();
@@ -24,27 +25,28 @@ namespace EmergencyApp
             if (this.BindingContext == null)
                 return;
 
-            if ((this.BindingContext as ViewModel).OrderList.Count > 0)
+            AddRecipientViewModel = this.BindingContext as ViewModel;
+
+            if (AddRecipientViewModel.OrderList.Count > 0)
                 label.Text = "Added contacts";
             else
                 label.Text = "No contact added..!";
         }
 
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             try
             {
-                var table = (from i in (this.BindingContext as ViewModel).database.Table<RecipientModel>() select i);
-
-                (this.BindingContext as ViewModel).OrderList.Remove(e.Item as RecipientModel);
-                (this.BindingContext as ViewModel).database.Query<RecipientModel>("DELETE from RecipientModel where Recipients =" + (e.Item as RecipientModel).Recipients).FirstOrDefault();
-                (this.BindingContext as ViewModel).contactNames = new string[table.Count()];
+                var table = from i in (this.AddRecipientViewModel).database.Table<RecipientModel>() select i;
+                AddRecipientViewModel.OrderList.Remove(e.Item as RecipientModel);
+                AddRecipientViewModel.database.Query<RecipientModel>("DELETE from RecipientModel where Recipient =" + (e.Item as RecipientModel).Recipient).FirstOrDefault();
+                AddRecipientViewModel.contactNames = new string[table.Count()];
 
                 if (table.Count() > 0)
                 {
                     for (int i = 0; i < table.Count(); i++)
                     {
-                        (this.BindingContext as ViewModel).contactNames[i] = (table.ToList().ToArray()[i].Recipients);
+                        AddRecipientViewModel.contactNames[i] = table.ToList().ToArray()[i].Recipient;
                     }
                 }
                 else
@@ -52,29 +54,34 @@ namespace EmergencyApp
             }
             catch (Exception ex)
             {
-                App.Current.MainPage.DisplayAlert("Alert", "Unable to delete contact, please try re-installing the application.", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", "Unable to delete contact, please try re-installing the application.", "OK");
             }
         }
 
-        private void Entry_Completed(object sender, EventArgs e)
+        private async void Entry_Completed(object sender, EventArgs e)
         {
             try
             {
-                (this.BindingContext as ViewModel).database.Query<RecipientModel>("INSERT INTO RecipientModel (Recipients) values('" + entry.Text + "')");
-                (this.BindingContext as ViewModel).OrderList.Add(new RecipientModel() { Recipients = entry.Text });
-                (this.BindingContext as ViewModel).contactNames = new string[(this.BindingContext as ViewModel).OrderList.Count()];
+                AddRecipientViewModel.database.Query<RecipientModel>("INSERT INTO RecipientModel (Recipient) values('" + entry.Text + "')");
+                AddRecipientViewModel.OrderList.Add(new RecipientModel() { Recipient = entry.Text });
+                AddRecipientViewModel.contactNames = new string[AddRecipientViewModel.OrderList.Count()];
 
-                for (int i = 0; i < (this.BindingContext as ViewModel).OrderList.Count(); i++)
+                for (int i = 0; i < AddRecipientViewModel.OrderList.Count(); i++)
                 {
-                    (this.BindingContext as ViewModel).contactNames[i] = (this.BindingContext as ViewModel).OrderList[i].Recipients;
+                    AddRecipientViewModel.contactNames[i] = AddRecipientViewModel.OrderList[i].Recipient;
                 }
                 entry.Text = null;
                 label.Text = "Added contacts";
             }
             catch (Exception ex)
             {
-                App.Current.MainPage.DisplayAlert("Alert", "Unable to add contact, please try re-installing the application.", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", "Unable to add contact, please try re-installing the application.", "OK");
             }
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            var contact = await Contacts.PickContactAsync();
         }
     }
 }

@@ -31,7 +31,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkMode>None</AndroidLinkMode>
     <MandroidI18n />
     <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
@@ -115,34 +115,49 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\siren.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\siren.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\siren.jpg" />
+    <AndroidResource Include="Resources\drawable\siren.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\siren.jpg" />
+    <AndroidResource Include="Resources\drawable\sirenText.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\siren.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\siren.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\siren.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\sirenText.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\sirenText.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\sirenText.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\sirenText.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\siren.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\sirenText.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\sirenText.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\sirenText.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\siren.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\sirenText.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\sirenText.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\siren.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-mdpi\siren.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xhdpi\siren.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxhdpi\siren.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\siren.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

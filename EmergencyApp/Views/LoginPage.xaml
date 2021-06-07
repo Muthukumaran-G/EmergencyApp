@@ -3,29 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmergencyApp.LoginPage">
     <ContentPage.Content>
-        <Grid BackgroundColor="NavajoWhite">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" Text="Create new user" FontSize="Large" FontAttributes="Bold"/>
-            <Grid VerticalOptions="CenterAndExpand" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Frame CornerRadius="50" Opacity="0.7" Margin="20">
-                    <Entry Placeholder="Enter user name" Text="{Binding UserName}"/>
-                </Frame>
-                <Button Margin="20" x:Name="btn" Opacity="0.7"
-                        CornerRadius="50"
-                        Text="Login"
-                        BackgroundColor="#0009ff"
+        <Grid BackgroundColor="OrangeRed">
+            <Label Margin="40" Grid.RowSpan="2" FontFamily="Lobster-Regular" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="White" Text="Emergency App" FontSize="25"/>
+            <Frame BackgroundColor="White" BorderColor="PeachPuff" CornerRadius="7" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Scale="11" Rotation="45" TranslationX="-120"/>
+            <Image Margin="30" Source="siren.png" HeightRequest="120" WidthRequest="120" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Label Margin="40" FontFamily="Lobster-Regular" HorizontalTextAlignment="Start" VerticalTextAlignment="End" TextColor="Black" Text="New user?" FontSize="Large" FontAttributes="Bold"/>
+            <Entry FontFamily="Lobster-Regular" HorizontalOptions="Start" WidthRequest="250" VerticalOptions="Center" Margin="40,60,0,0" Grid.RowSpan="2" Placeholder="Enter user name" Text="{Binding UserName}"/>
+            <Frame x:Name="frameGrid" Grid.Row="1" BackgroundColor="Transparent" Margin="20" TranslationY="-20" CornerRadius="50" Padding="0" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="180" >
+                <Grid>
+                    <Button x:Name="btn" BackgroundColor="Maroon" FontFamily="Lobster-Regular"
+                        Text="E n t e r  --->" FontSize="20"
                         TextColor="White"
-                        Grid.Row="1" 
                         Clicked="Button_Clicked"/>
-                <ActivityIndicator Grid.Row="1" Margin="0,20,0,0" IsVisible="False" x:Name="indicator" IsRunning="True" IsEnabled="True"/>
-            </Grid>
+                    <ActivityIndicator Margin="0,20,0,0" Color="Maroon" IsVisible="false" x:Name="indicator" IsRunning="True" IsEnabled="True"/>
+                </Grid>
+            </Frame>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
