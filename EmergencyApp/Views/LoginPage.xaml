@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmergencyApp.LoginPage">
+             x:Class="EmergencyApp.LoginPage" NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid BackgroundColor="OrangeRed">
             <Label Margin="40" Grid.RowSpan="2" FontFamily="Lobster-Regular" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="White" Text="Emergency App" FontSize="25"/>
@@ -9,15 +9,31 @@
             <Image Margin="30" Source="siren.png" HeightRequest="120" WidthRequest="120" HorizontalOptions="Start" VerticalOptions="Center"/>
             <Label Margin="40" FontFamily="Lobster-Regular" HorizontalTextAlignment="Start" VerticalTextAlignment="End" TextColor="Black" Text="New user?" FontSize="Large" FontAttributes="Bold"/>
             <Entry FontFamily="Lobster-Regular" HorizontalOptions="Start" WidthRequest="250" VerticalOptions="Center" Margin="40,60,0,0" Grid.RowSpan="2" Placeholder="Enter user name" Text="{Binding UserName}"/>
-            <Frame x:Name="frameGrid" Grid.Row="1" BackgroundColor="Transparent" Margin="20" TranslationY="-20" CornerRadius="50" Padding="0" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="180" >
+            <Frame x:Name="frameGrid" Grid.Row="1" BackgroundColor="Transparent" Margin="20" TranslationY="-20" CornerRadius="50" Padding="0" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="150" >
                 <Grid>
-                    <Button x:Name="btn" BackgroundColor="Maroon" FontFamily="Lobster-Regular"
-                        Text="E n t e r  --->" FontSize="20"
+                    <Grid IsVisible="{Binding IsLoginVisible}">
+                        <Button BackgroundColor="Maroon" FontFamily="Lobster-Regular"
+                        Text="E n t e r" FontSize="20"
                         TextColor="White"
-                        Clicked="Button_Clicked"/>
-                    <ActivityIndicator Margin="0,20,0,0" Color="Maroon" IsVisible="false" x:Name="indicator" IsRunning="True" IsEnabled="True"/>
+                        Command="{Binding LogIn}"/>
+                    </Grid>
+                    <ActivityIndicator Margin="0,20,0,0" Color="Maroon" x:Name="indicator" IsRunning="True" IsEnabled="True">
+                        <ActivityIndicator.Triggers>
+                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding IsLoginVisible}" Value="True">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding IsLoginVisible}" Value="False">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </ActivityIndicator.Triggers>
+                    </ActivityIndicator>
                 </Grid>
             </Frame>
+            <Image x:Name="LoginImage" IsVisible="{Binding IsLoginVisible}" Source="LoginArrow" Grid.Row="1" TranslationY="-20" HorizontalOptions="CenterAndExpand" TranslationX="70" VerticalOptions="Center" WidthRequest="50" >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogIn}"/>
+                </Image.GestureRecognizers>
+            </Image>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

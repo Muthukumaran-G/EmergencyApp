@@ -4,22 +4,23 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="EmergencyApp.MainPage">
+             x:Class="EmergencyApp.MainPage" NavigationPage.HasNavigationBar="False">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Text="Add contacts"
-            Clicked="AddContacts_Clicked"
+            IconImageSource="Directory"
+            Command="{Binding AddContactPage}"
             Priority="1"
             Order="Primary"/>
         <ToolbarItem
             Text="About"
-            Clicked="About_Clicked"
+            Command="{Binding AboutPage}"
             Priority="2"
             Order="Secondary"/>
         <ToolbarItem
             Text="Logout"
-            Clicked="ToolBar_Clicked"
+            Command="{Binding Logout}"
             Priority="3"
             Order="Secondary"/>
     </ContentPage.ToolbarItems>
@@ -35,15 +36,54 @@
             </Grid>
         </Frame>
         <Grid x:Name="parentGrid" BackgroundColor="Black">
-            <Button Text="S O S" TextColor="White"
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding FrameVisibility}" Value="True">
+                    <Setter Property="Opacity" Value="0.2"/>
+                    <Setter Property="InputTransparent" Value="True"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Grid" Binding="{Binding FrameVisibility}" Value="False">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="InputTransparent" Value="False"/>
+                </DataTrigger>
+            </Grid.Triggers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="Lobster-Regular" TextColor="White" FontSize="20"/>
+            <Image Grid.Column="1" Grid.Row="1" WidthRequest="40"  HeightRequest="40" Margin="20" VerticalOptions="End" HorizontalOptions="End" Source="Directory">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddContactPage}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Grid.Row="1" WidthRequest="30"  HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" Source="About">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AboutPage}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="10">
+                
+                
+                <Image HeightRequest="40" Source="Logout">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Logout}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            
+            <Button Text="S O S" Grid.ColumnSpan="2" Grid.RowSpan="2" TextColor="White"
                     HorizontalOptions="Center" VerticalOptions="Center"
                     BackgroundColor="Red" 
                     FontSize="Large" 
-                    Margin="20,20,20,20" 
+                    Margin="20,0,20,0" 
                     CornerRadius="150" 
                     HeightRequest="300" 
                     WidthRequest="300" 
-                    Clicked="Button_Clicked" />
+                    Command="{Binding SOS}" />
         </Grid>
     </Grid>
 </ContentPage>

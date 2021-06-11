@@ -12,9 +12,10 @@ namespace EmergencyApp
         {
             InitializeComponent();
             var viewModel = new ViewModel();
-            if (viewModel.UserName == null || viewModel.UserName.Equals(string.Empty) || viewModel.OrderList.Count() <= 0)
+            if (string.IsNullOrEmpty(viewModel.UserName))
             {
-                MainPage = new LoginPage(viewModel) { BindingContext = viewModel };
+                viewModel.UserName = string.Empty;
+                MainPage = new LoginPage() { BindingContext = viewModel };
             }
             else
             {
