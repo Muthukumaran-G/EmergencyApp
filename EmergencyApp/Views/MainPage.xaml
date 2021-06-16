@@ -4,41 +4,23 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="EmergencyApp.MainPage" NavigationPage.HasNavigationBar="False">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Text="Add contacts"
-            IconImageSource="Directory"
-            Command="{Binding AddContactPage}"
-            Priority="1"
-            Order="Primary"/>
-        <ToolbarItem
-            Text="About"
-            Command="{Binding AboutPage}"
-            Priority="2"
-            Order="Secondary"/>
-        <ToolbarItem
-            Text="Logout"
-            Command="{Binding Logout}"
-            Priority="3"
-            Order="Secondary"/>
-    </ContentPage.ToolbarItems>
+             x:Class="EmergencyApp.MainPage" NavigationPage.HasNavigationBar="False"
+             FlowDirection="{x:Static Device.FlowDirection}">
     <Grid>
         <Frame IsVisible="{Binding FrameVisibility}" BackgroundColor="#d3d3d3" HasShadow="True">
             <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label Text="Please wait" FontSize="Large"/>
-                <ActivityIndicator Grid.Row="1" HeightRequest="60" WidthRequest="60" Color="CornflowerBlue" x:Name="indicator" IsEnabled="True" IsRunning="True"/>
+                <Frame HorizontalOptions="Center" Padding="10" BackgroundColor="White" HasShadow="True" CornerRadius="25" VerticalOptions="Center">
+                    <ActivityIndicator HeightRequest="30" WidthRequest="30" Color="CornflowerBlue" x:Name="indicator" IsEnabled="True" IsRunning="True"/>
+                </Frame>
             </Grid>
         </Frame>
         <Grid x:Name="parentGrid" BackgroundColor="Black">
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding FrameVisibility}" Value="True">
-                    <Setter Property="Opacity" Value="0.2"/>
+                    <Setter Property="Opacity" Value="0.1"/>
                     <Setter Property="InputTransparent" Value="True"/>
                 </DataTrigger>
                 <DataTrigger TargetType="Grid" Binding="{Binding FrameVisibility}" Value="False">
@@ -47,15 +29,17 @@
                 </DataTrigger>
             </Grid.Triggers>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="Lobster-Regular" TextColor="White" FontSize="20"/>
-            <Image Grid.Column="1" Grid.Row="1" WidthRequest="40"  HeightRequest="40" Margin="20" VerticalOptions="End" HorizontalOptions="End" Source="Directory">
+            <ScrollView Orientation="Horizontal">
+                <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="Lobster-Regular" TextColor="White" FontSize="20"/>
+            </ScrollView>
+            <Image Grid.Column="1" Grid.Row="1" WidthRequest="35"  HeightRequest="35" Margin="20" VerticalOptions="End" HorizontalOptions="End" Source="Directory">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding AddContactPage}"/>
                 </Image.GestureRecognizers>
@@ -74,7 +58,7 @@
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
-            
+
             <Button Text="S O S" Grid.ColumnSpan="2" Grid.RowSpan="2" TextColor="White"
                     HorizontalOptions="Center" VerticalOptions="Center"
                     BackgroundColor="Red" 
@@ -83,7 +67,18 @@
                     CornerRadius="150" 
                     HeightRequest="300" 
                     WidthRequest="300" 
-                    Command="{Binding SOS}" />
+                    Command="{Binding SOS}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding FrameVisibility}" Value="True">
+                        <Setter Property="Opacity" Value="0.01"/>
+                        <Setter Property="InputTransparent" Value="True"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding FrameVisibility}" Value="False">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="InputTransparent" Value="False"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
         </Grid>
     </Grid>
 </ContentPage>

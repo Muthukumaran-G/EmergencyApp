@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:app="clr-namespace:EmergencyApp"
+             x:Class="EmergencyApp.GPSDeniedPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="LightSeaGreen">
+    <ContentPage.BindingContext>
+        <app:GPSDeniedViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        
+        <Grid RowDefinitions="*, Auto">
+            <StackLayout Margin="20"
+                BackgroundColor="Transparent"
+                Spacing="10"
+                VerticalOptions="Center">
+
+                <!--  Display the svg illustration image  -->
+                <app:SVGImage
+                    x:Name="ErrorImage"
+                    HeightRequest="{x:OnIdiom Phone=200,
+                                             Desktop=300,
+                                             Tablet=300}"
+                    Source="{Binding ImagePath}"
+                    VerticalOptions="Center"
+                    WidthRequest="{x:OnIdiom Phone=200,
+                                             Desktop=300,
+                                             Tablet=300}" />
+
+                <!--  Label to display header  -->
+                <Label HorizontalOptions="Center" CharacterSpacing="2"
+                    FontSize="20" FontFamily="Lobster-Regular"
+                    Text="Location permission required"
+                    TextColor="AliceBlue"
+                    VerticalTextAlignment="Center" />
+
+                <!--  Label to display content  -->
+                <Label HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                    FontSize="16" FontFamily="Lobster-Regular"
+                    CharacterSpacing="2"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="Allow app to automatically detect your location to share with your recipients."
+                    TextColor="AliceBlue"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+
+            <!--  Try again button  -->
+            <Button CornerRadius="25" Margin="20" CharacterSpacing="3" BackgroundColor="Red"
+                Grid.Row="1" FontFamily="Lobster-Regular" TextColor="AliceBlue" FontSize="17"
+                Command="{Binding Retry}"
+                Text="Retry"
+                VerticalOptions="End"
+                WidthRequest="245" />
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

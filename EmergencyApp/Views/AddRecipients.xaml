@@ -6,7 +6,8 @@
              xmlns:emergencyapp="clr-namespace:EmergencyApp"
              mc:Ignorable="d"
              x:Class="EmergencyApp.AddRecipients"
-             BackgroundColor="Black" NavigationPage.HasNavigationBar="False">
+             BackgroundColor="Black" NavigationPage.HasNavigationBar="False"
+             FlowDirection="{x:Static Device.FlowDirection}">
 
     <ContentPage.Behaviors>
         <emergencyapp:RecipientBehavior/>
@@ -36,11 +37,19 @@
                                 <TapGestureRecognizer Command="{Binding AddNewContact}"/>
                             </Image.GestureRecognizers>
                         </Image>
-                        <Image Source="Phonebook" Margin="5" WidthRequest="40" HeightRequest="40">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding OpenPhonebook}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
+                        <Grid>
+                            <Grid.Triggers>
+                                <DataTrigger TargetType="Grid" Binding="{Binding IsAccessDenied}" Value="True">
+                                    <Setter Property="Opacity" Value="0.5"/>
+                                </DataTrigger>
+                            </Grid.Triggers>
+                            <BoxView HeightRequest="3" BackgroundColor="White" IsVisible="{Binding IsAccessDenied}" HorizontalOptions="End" VerticalOptions="Center" Rotation="115"/>
+                            <Image Source="Phonebook" Margin="5" WidthRequest="40" HeightRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenPhonebook}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
                     </StackLayout>
                 </Grid>
                 <CollectionView x:Name="collectionView" ItemsSource="{Binding OrderList}" Margin="10">

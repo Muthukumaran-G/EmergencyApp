@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="EmergencyApp.AboutPage" NavigationPage.HasNavigationBar="False">
+             x:Class="EmergencyApp.AboutPage" NavigationPage.HasNavigationBar="False"
+             FlowDirection="{x:Static Device.FlowDirection}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="Teal">
             <Label Text="© Author - qb" TextColor="White" 

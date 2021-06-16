@@ -32,5 +32,23 @@ namespace EmergencyApp
             this.ViewModel.FrameVisibility = false;
             parentGrid.Opacity = 1;
         }
+
+        double previousTime = 0;
+
+        protected override bool OnBackButtonPressed()
+        {
+            var currentTime = new TimeSpan(DateTime.Now.Ticks).TotalSeconds;
+            if (previousTime == 0 || currentTime - previousTime > 7)
+            {
+                previousTime = currentTime;
+                DependencyService.Get<IToastMessage>().ShowToast("Press back again to close");
+                return true;
+            }
+            else
+            {
+                previousTime = 0;
+                return base.OnBackButtonPressed();
+            }
+        }
     }
 }

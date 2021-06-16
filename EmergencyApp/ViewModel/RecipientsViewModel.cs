@@ -135,6 +135,20 @@ namespace EmergencyApp
             }
         }
 
+        private bool isAccessDenied;
+        public bool IsAccessDenied
+        {
+            get
+            {
+                return isAccessDenied;
+            }
+            set
+            {
+                isAccessDenied = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private RecipientModel editContactDetails;
         public RecipientModel EditContactDetails
         {
@@ -184,6 +198,23 @@ namespace EmergencyApp
             if (OrderList.Count > 0)
                 IsContactAdded = true;
             AddRecipientsList();
+            CheckPhoneBookAccess();
+        }
+
+        private async void CheckPhoneBookAccess()
+        {
+            var contactAccess = await Permissions.RequestAsync<Permissions.ContactsRead>();
+            if (contactAccess == PermissionStatus.Denied)
+            {
+                this.IsAccessDenied = true;
+                DependencyService.Get<IToastMessage>().ShowToast("Contact access denied.");
+
+            }
+            else if (contactAccess == PermissionStatus.Granted)
+            {
+                this.IsAccessDenied = false;
+                DependencyService.Get<IToastMessage>().ShowToast("Contact access permitted.");
+            }
         }
 
         private void AddRecipientsList()
@@ -217,14 +248,13 @@ namespace EmergencyApp
             }
         }
 
-        private async void DeleteInvokedCommand(object obj)
+        private void DeleteInvokedCommand(object obj)
         {
             try
             {
                 var table = from i in database.Table<RecipientModel>() select i;
                 OrderList.Remove(obj as RecipientModel);
                 database.Delete(obj);
-                //database.Query<RecipientModel>("DELETE from RecipientModel where RecipientNumber =" + (e.Item as RecipientModel).RecipientNumber).FirstOrDefault();
                 contactNames = new string[table.Count()];
 
                 if (table.Count() > 0)
@@ -236,10 +266,12 @@ namespace EmergencyApp
                 }
                 else
                     ListTitle = "No contact added..!";
+
+                DependencyService.Get<IToastMessage>().ShowToast("Recipient deleted.");
             }
             catch (Exception ex)
             {
-                    await App.Current.MainPage.DisplayAlert("Alert", "Unable to delete contact, please try again.", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("Unable to delete contact, please try again.");
             }
         }
 
@@ -258,7 +290,7 @@ namespace EmergencyApp
             ShowPopup = false;
         }
 
-        private async void DoneCommand(object obj)
+        private void DoneCommand(object obj)
         {
             try
             {
@@ -279,6 +311,8 @@ namespace EmergencyApp
                     EditContactDetails.RecipientName = this.RecipientName;
                     EditContactDetails.RecipientNumber = this.RecipientNumber;
                     database.Update(EditContactDetails);
+                    DependencyService.Get<IToastMessage>().ShowToast("Recipient details updated.");
+
                 }
                 else
                 {
@@ -291,6 +325,8 @@ namespace EmergencyApp
                     {
                         contactNames[i] = OrderList[i].RecipientNumber;
                     }
+
+                    DependencyService.Get<IToastMessage>().ShowToast("New recipient added.");
                 }
 
                 this.RecipientName = string.Empty;
@@ -301,7 +337,7 @@ namespace EmergencyApp
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Unable to add contact, please try re-installing the application.", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("Unable to add contact, please try adding again.");
                 ShowPopup = false;
             }
         }
@@ -310,7 +346,20 @@ namespace EmergencyApp
         {
             try
             {
+                if(IsAccessDenied)
+                {
+                    CheckPhoneBookAccess();
+                    return;
+                }
+
                 var contact = await Contacts.PickContactAsync();
+
+                if (contact == null)
+                    return;
+
+                if (string.IsNullOrEmpty(contact.DisplayName) || contact.Phones.Count <= 0 || string.IsNullOrEmpty(contact.Phones[0].PhoneNumber))
+                    return;
+
                 var newContact = new RecipientModel() { RecipientName = contact.DisplayName, RecipientNumber = contact.Phones[0].PhoneNumber };
                 database.Insert(newContact);
                 OrderList.Add(newContact);
@@ -321,11 +370,13 @@ namespace EmergencyApp
                     contactNames[i] = OrderList[i].RecipientNumber;
                 }
 
+                DependencyService.Get<IToastMessage>().ShowToast("New recipient added from phonebook.");
+
                 ListTitle = "Added Contacts";
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Unable to add contact, please try adding again.", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("Unable to add contact, please try adding again.");
             }
         }
 

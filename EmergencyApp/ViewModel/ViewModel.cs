@@ -20,6 +20,8 @@ namespace EmergencyApp
 
         private bool frameVisibility;
         public string userName;
+        private bool isSmsAccessDenied;
+
         public bool FrameVisibility
         {
             get
@@ -47,6 +49,8 @@ namespace EmergencyApp
                 RaisePropertyChanged();
             }
         }
+
+        
 
         public string UserName
         {
@@ -102,7 +106,7 @@ namespace EmergencyApp
         {
             if (string.IsNullOrEmpty(UserName))
             {
-                await App.Current.MainPage.DisplayAlert("!!", "Please enter user name", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("Please enter user name");
             }
             else
             {
@@ -139,11 +143,15 @@ namespace EmergencyApp
 
         private void AddContactPageCommand(object obj)
         {
-            App.Current.MainPage.Navigation.PushModalAsync(new AddRecipients());
+            App.Current.MainPage.Navigation.PushAsync(new AddRecipients());
         }
 
         private async void SosCommand(object obj)
         {
+            CheckSMSPermission();
+            if (isSmsAccessDenied)
+                return;
+
             var recipientsTable = from i in database.Table<RecipientModel>() select i;
             contactNames = new string[recipientsTable.Count()];
 
@@ -158,10 +166,24 @@ namespace EmergencyApp
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("", "Please add the recipients", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("No recipients.");
             }
         }
 
+        private void CheckSMSPermission()
+        {
+            var status = App.SMSAccessCheck().Result;
+            if (status == PermissionStatus.Denied)
+            {
+                isSmsAccessDenied = true;
+                DependencyService.Get<IToastMessage>().ShowToast("SMS access denied.");
+            }
+            else if (status == PermissionStatus.Granted)
+            {
+                isSmsAccessDenied = false;
+                DependencyService.Get<IToastMessage>().ShowToast("SMS access permitted.");
+            }
+        }
 
         private async void SendSMS()
         {
@@ -187,22 +209,23 @@ namespace EmergencyApp
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Default);
                 CurrentLocation = await Geolocation.GetLocationAsync(request).ConfigureAwait(false);
+                DependencyService.Get<IToastMessage>().ShowToast("Location accquired");
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "GPS not supported", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("GPS not supported");
             }
             catch (FeatureNotEnabledException fneEx)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "GPS not enabled", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("GPS not enabled");
             }
             catch (PermissionException pEx)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Permission not granted", "OK");
+                await App.Current.MainPage.Navigation.PushAsync(new GPSDeniedPage());
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Unable to get location", "OK");
+                DependencyService.Get<IToastMessage>().ShowToast("Unable to get location. Check connection.");
             }
 
             FrameVisibility = false;
