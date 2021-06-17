@@ -203,17 +203,16 @@ namespace EmergencyApp
 
         private async void CheckPhoneBookAccess()
         {
-            var contactAccess = await Permissions.RequestAsync<Permissions.ContactsRead>();
-            if (contactAccess == PermissionStatus.Denied)
+            var contactAccess = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
+
+            if (contactAccess != PermissionStatus.Granted)
             {
                 this.IsAccessDenied = true;
                 DependencyService.Get<IToastMessage>().ShowToast("Contact access denied.");
-
             }
-            else if (contactAccess == PermissionStatus.Granted)
+            else
             {
                 this.IsAccessDenied = false;
-                DependencyService.Get<IToastMessage>().ShowToast("Contact access permitted.");
             }
         }
 

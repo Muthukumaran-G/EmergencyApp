@@ -16,5 +16,10 @@ namespace EmergencyApp
         {
             InitializeComponent();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
     }
 }

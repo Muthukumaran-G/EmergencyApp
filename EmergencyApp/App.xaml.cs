@@ -19,11 +19,7 @@ namespace EmergencyApp
         public App()
         {
             InitializeComponent();
-            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             
-            
-            DependencyService.Get<ILocationService>().GPSStateChanged += App_GPSStateChanged;
-            DependencyService.Get<ILocationService>().LocationChanged += App_LocationChanged;
             var viewModel = new ViewModel();
 
             if (string.IsNullOrEmpty(viewModel.UserName))
@@ -36,15 +32,20 @@ namespace EmergencyApp
                 MainPage = new NavigationPage(new MainPage(viewModel) { BindingContext = viewModel });
             }
 
-            SMSAccessCheck();
-            GPSPermissionCheck();
+            CheckAndRequestLocationPermission();
         }
 
-        internal static async Task<PermissionStatus> SMSAccessCheck()
+        public async void CheckAndRequestLocationPermission()
         {
-            return await Permissions.RequestAsync<Permissions.Sms>();
-            
-            
+            var locationStatus = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            var contactStatus = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
+            var smsStatus = await Permissions.CheckStatusAsync<Permissions.Sms>();
+            locationStatus = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            contactStatus = await Permissions.RequestAsync<Permissions.ContactsRead>();
+            smsStatus = await Permissions.RequestAsync<Permissions.Sms>();
+
+            if (locationStatus != PermissionStatus.Granted || smsStatus != PermissionStatus.Granted)
+                await App.Current.MainPage.Navigation.PushAsync(new GPSDeniedPage());
         }
 
         private async void GPSPermissionCheck()
@@ -55,38 +56,9 @@ namespace EmergencyApp
             {
                 await App.Current.MainPage.Navigation.PushAsync(new GPSDeniedPage());
             }
-
-            
         }
 
-        private void App_LocationChanged(object sender, LocationEventArgs e)
-        {
-
-        }
-
-        private void App_GPSStateChanged(object sender, GPSStateEventArgs e)
-        {
-            if(e.IsGPSEnabled)
-            {
-                DependencyService.Get<IToastMessage>().ShowToast("GPS enabled");
-            }
-            else
-            {
-                DependencyService.Get<IToastMessage>().ShowToast("GPS disabled");
-            }
-        }
-
-        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        {
-            if (e.NetworkAccess == NetworkAccess.Internet)
-            {
-                DependencyService.Get<IToastMessage>().ShowToast("Network connected");
-            }
-            else
-            {
-                DependencyService.Get<IToastMessage>().ShowToast("Network disconnected");
-            }
-        }
+        
 
         protected override void OnStart()
         {

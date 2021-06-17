@@ -100,6 +100,21 @@ namespace EmergencyApp
                 if (userTable.Count() > 0)
                     this.UserName = userTable.ToList().ToArray()[0].UserName;
             }
+            DependencyService.Get<ILocationService>().LocationChanged += App_LocationChanged;
+            DependencyService.Get<ILocationService>().GPSStateChanged += App_GPSStateChanged;
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (e.NetworkAccess == NetworkAccess.Internet)
+            {
+                DependencyService.Get<IToastMessage>().ShowToast("Network connected");
+            }
+            else
+            {
+                DependencyService.Get<IToastMessage>().ShowToast("Network disconnected");
+            }
         }
 
         private async void LogInCommand(object obj)
@@ -111,7 +126,6 @@ namespace EmergencyApp
             else
             {
                 IsLoginVisible = false;
-                GetLocation();
                 await Task.Delay(2000);
                 //if (CurrentLocation == null)
                 //    await GetLocation();
@@ -136,6 +150,31 @@ namespace EmergencyApp
             App.Current.MainPage = new LoginPage() { BindingContext = newViewModel };
         }
 
+
+        private void App_LocationChanged(object sender, LocationEventArgs e)
+        {
+            if (CurrentLocation != null)
+            {
+                CurrentLocation.Altitude = e.Altitude;
+                CurrentLocation.Latitude = e.Latitude;
+                CurrentLocation.Longitude = e.Longitude;
+                DependencyService.Get<IToastMessage>().ShowToast("Location updated");
+            }
+        }
+
+        private void App_GPSStateChanged(object sender, GPSStateEventArgs e)
+        {
+            if (e.IsGPSEnabled)
+            {
+                DependencyService.Get<IToastMessage>().ShowToast("GPS enabled");
+            }
+            else
+            {
+                DependencyService.Get<IToastMessage>().ShowToast("GPS disabled");
+            }
+        }
+
+
         private void AboutPageCommand(object obj)
         {
             App.Current.MainPage.Navigation.PushModalAsync(new AboutPage());
@@ -143,15 +182,11 @@ namespace EmergencyApp
 
         private void AddContactPageCommand(object obj)
         {
-            App.Current.MainPage.Navigation.PushAsync(new AddRecipients());
+            App.Current.MainPage.Navigation.PushModalAsync(new AddRecipients());
         }
 
         private async void SosCommand(object obj)
         {
-            CheckSMSPermission();
-            if (isSmsAccessDenied)
-                return;
-
             var recipientsTable = from i in database.Table<RecipientModel>() select i;
             contactNames = new string[recipientsTable.Count()];
 
@@ -170,27 +205,12 @@ namespace EmergencyApp
             }
         }
 
-        private void CheckSMSPermission()
-        {
-            var status = App.SMSAccessCheck().Result;
-            if (status == PermissionStatus.Denied)
-            {
-                isSmsAccessDenied = true;
-                DependencyService.Get<IToastMessage>().ShowToast("SMS access denied.");
-            }
-            else if (status == PermissionStatus.Granted)
-            {
-                isSmsAccessDenied = false;
-                DependencyService.Get<IToastMessage>().ShowToast("SMS access permitted.");
-            }
-        }
-
         private async void SendSMS()
         {
             if (CurrentLocation != null)
             {
                 var uri = string.Empty;
-                uri = $"https://" + $"maps.google.com/maps?q=@{CurrentLocation.Latitude},{CurrentLocation.Longitude},{CurrentLocation.Altitude}";
+                uri = $"https://" + $"maps.google.com/maps?q=@{CurrentLocation.Latitude},{CurrentLocation.Longitude}";
 
                 System.Diagnostics.Debug.WriteLine(uri);
                 await SMS.SendSms($"This is {UserName}. I need your help. I am currently here " + System.Environment.NewLine + " " + uri, contactNames);

@@ -25,12 +25,18 @@ namespace EmergencyApp
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            this.ViewModel.FrameVisibility = true;
             parentGrid.Opacity = 0.2;
             if (ViewModel.CurrentLocation == null)
                 await ViewModel.GetLocation();
-            this.ViewModel.FrameVisibility = false;
             parentGrid.Opacity = 1;
+            try
+            {
+                DependencyService.Get<ILocationService>().RequestLocation();
+            }
+            catch(Exception ex)
+            {
+                DependencyService.Get<IToastMessage>().ShowToast("Enable GPS.");
+            }
         }
 
         double previousTime = 0;

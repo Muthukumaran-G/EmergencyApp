@@ -30,7 +30,7 @@ namespace EmergencyApp
     {
         public GPSStateEventArgs(string boolString)
         {
-            IsGPSEnabled = Boolean.TryParse(boolString, out _);
+            IsGPSEnabled = Convert.ToBoolean(boolString);
         }
 
         public bool IsGPSEnabled { get; }
