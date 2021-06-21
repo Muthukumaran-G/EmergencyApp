@@ -30,7 +30,7 @@
                     <Button Text="Contacts" Clicked="Button_Clicked"/>
                 </StackLayout>-->
                 <Grid>
-                    <Label x:Name="label" FontFamily="Lobster-Regular" TextColor="White" FontSize="20" Text="{Binding ListTitle}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                    <Label x:Name="label" FontFamily="ElMessiri-Regular" TextColor="White" FontSize="20" Text="{Binding ListTitle}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
                     <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="End" Grid.Column="1">
                         <Image Source="Telephone" Margin="8" WidthRequest="40" HeightRequest="40">
                             <Image.GestureRecognizers>
@@ -84,8 +84,8 @@
                                 </SwipeView.RightItems>
                                 <Frame BackgroundColor="AntiqueWhite" HasShadow="True" Padding="5" CornerRadius="5">
                                     <StackLayout>
-                                        <Label Text="{Binding RecipientName, StringFormat='Name: {0}'}" FontFamily="Lobster-Regular" TextTransform="Uppercase" CharacterSpacing="3" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" TextColor="Black"/>
-                                        <Label Text="{Binding RecipientNumber, StringFormat='Number: {0}'}" FontFamily="Lobster-Regular" TextTransform="Uppercase" CharacterSpacing="3" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="{Binding RecipientName, StringFormat='Name: {0}'}" FontFamily="ElMessiri-Regular" TextTransform="Uppercase" CharacterSpacing="3" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" TextColor="Black"/>
+                                        <Label Text="{Binding RecipientNumber, StringFormat='Number: {0}'}" FontFamily="ElMessiri-Regular" TextTransform="Uppercase" CharacterSpacing="3" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
                                     </StackLayout>
                                 </Frame>
                             </SwipeView>
@@ -101,25 +101,25 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Label BackgroundColor="DodgerBlue" Text="{Binding PopupTitle}" CharacterSpacing="3" VerticalTextAlignment="Center" TextColor="White" Padding="15" FontFamily="Lobster-Regular" TextTransform="Uppercase"/>
+                    <Label BackgroundColor="DodgerBlue" Text="{Binding PopupTitle}" CharacterSpacing="3" VerticalTextAlignment="Center" TextColor="White" Padding="15" FontFamily="ElMessiri-Regular" TextTransform="Uppercase"/>
                     <ImageButton Source="Close" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" Padding="5" Margin="0,0,15,0" BackgroundColor="Red" CornerRadius="15" Command="{Binding BackgroundGesture}"/>
                     <StackLayout Grid.Row="1" Orientation="Horizontal">
-                        <Label WidthRequest="70" Text="Name : " CharacterSpacing="1" VerticalTextAlignment="End" HorizontalTextAlignment="Center" FontFamily="Lobster-Regular"/>
+                        <Label WidthRequest="70" Text="Name : " CharacterSpacing="1" VerticalTextAlignment="End" HorizontalTextAlignment="Center" FontFamily="ElMessiri-Regular"/>
                         <Grid  HorizontalOptions="Start" WidthRequest="200" >
                             <Frame BackgroundColor="AliceBlue" CornerRadius="15"/>
-                            <Entry Text="{Binding RecipientName}" FontSize="13" FontFamily="Lobster-Regular" ClearButtonVisibility="WhileEditing" CharacterSpacing="3"/>
+                            <Entry Text="{Binding RecipientName}" FontSize="13" FontFamily="ElMessiri-Regular" ClearButtonVisibility="WhileEditing" CharacterSpacing="3"/>
                             </Grid>
                     </StackLayout>
                     <Label IsVisible="{Binding IsNameEmpty}" FontSize="9" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="End" TranslationY="3" WidthRequest="120" Text="Please enter the name" TextColor="Red"/>
                     <StackLayout Grid.Row="2" Orientation="Horizontal">
-                        <Label WidthRequest="70" Text="Number : " CharacterSpacing="1" FontFamily="Lobster-Regular" VerticalTextAlignment="End" HorizontalTextAlignment="Center"/>
+                        <Label WidthRequest="70" Text="Number : " CharacterSpacing="1" FontFamily="ElMessiri-Regular" VerticalTextAlignment="End" HorizontalTextAlignment="Center"/>
                         <Grid  HorizontalOptions="Start" WidthRequest="200" >
                             <Frame BackgroundColor="AliceBlue" CornerRadius="15"/>
-                            <Entry Text="{Binding RecipientNumber}" FontSize="13"  Keyboard="Numeric" Placeholder="With PinCode" ClearButtonVisibility="WhileEditing" FontFamily="Lobster-Regular" CharacterSpacing="2"/>
+                            <Entry Text="{Binding RecipientNumber}" FontSize="13"  Keyboard="Numeric" Placeholder="With PinCode" ClearButtonVisibility="WhileEditing" FontFamily="ElMessiri-Regular" CharacterSpacing="2"/>
                         </Grid>
                     </StackLayout>
                     <Label IsVisible="{Binding IsNumberEmpty}" FontSize="9" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="End" TranslationY="3" WidthRequest="120" Text="Please enter the number" TextColor="Red"/>
-                    <Button Text="Done" TextColor="White" CharacterSpacing="3" BackgroundColor="DodgerBlue" CornerRadius="25" FontFamily="Lobster-Regular" Margin="5,7,20,9" Grid.Row="3" HorizontalOptions="End" Command="{Binding Done}"/>
+                    <Button Text="Done" TextColor="White" CharacterSpacing="3" BackgroundColor="DodgerBlue" CornerRadius="25" FontFamily="ElMessiri-Regular" Margin="5,7,20,9" Grid.Row="3" HorizontalOptions="End" Command="{Binding Done}"/>
                 </Grid>
             </Frame>
         </Grid>

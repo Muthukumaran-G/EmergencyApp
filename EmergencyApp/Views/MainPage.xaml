@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:emergencyapp="clr-namespace:EmergencyApp"
              mc:Ignorable="d"
              x:Class="EmergencyApp.MainPage" NavigationPage.HasNavigationBar="False"
              FlowDirection="{x:Static Device.FlowDirection}">
@@ -37,48 +37,45 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ScrollView Orientation="Horizontal">
-                <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="Lobster-Regular" TextColor="White" FontSize="20"/>
+                <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="ElMessiri" TextColor="White" FontSize="20"/>
             </ScrollView>
-            <Image Grid.Column="1" Grid.Row="1" WidthRequest="35"  HeightRequest="35" Margin="20" VerticalOptions="End" HorizontalOptions="End" Source="Directory">
+            <!--<Image Grid.Column="1" Grid.Row="1" WidthRequest="35"  HeightRequest="35" Margin="20" VerticalOptions="End" HorizontalOptions="End" Source="Directory">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding AddContactPage}"/>
                 </Image.GestureRecognizers>
-            </Image>
-            <Image Grid.Row="1" WidthRequest="30"  HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" Source="About">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AboutPage}"/>
-                </Image.GestureRecognizers>
-            </Image>
-            <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="10">
-                
-                
-                <Image HeightRequest="40" Source="Logout">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Logout}"/>
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+            </Image>-->
+            <emergencyapp:Blob Grid.Column="1" TapCommand="{Binding AddContactPage}" TagName="Contact List" TagDirection="Left" Grid.Row="1" HeightRequest="35" Margin="20" VerticalOptions="End" HorizontalOptions="End" IconSource="Directory"/>
 
-            <Button Text="S O S" Grid.ColumnSpan="2" Grid.RowSpan="2" TextColor="White"
-                    HorizontalOptions="Center" VerticalOptions="Center"
+            <emergencyapp:Blob Grid.Row="1" TapCommand="{Binding AboutPage}" IsTagShown="{Binding IsTagVisible}" IconSource="About" TagName="About" HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" />
+
+            <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="10">
+                <emergencyapp:Blob Grid.Row="1" TapCommand="{Binding Logout}" TagDirection="Left" IconSource="Logout" TagName="Logout" HeightRequest="40" />
+            </StackLayout>
+            <Frame Grid.ColumnSpan="2" Padding="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center"
+                   CornerRadius="150" 
+                    HeightRequest="300" 
+                    WidthRequest="300">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding FrameVisibility}" Value="True">
+                        <Setter Property="Opacity" Value="0.01"/>
+                        <Setter Property="InputTransparent" Value="True"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Frame" Binding="{Binding FrameVisibility}" Value="False">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="InputTransparent" Value="False"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+                <Button Text="S O S" Grid.ColumnSpan="2" Grid.RowSpan="2" TextColor="White"
+                    HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold"
                     BackgroundColor="Red" 
-                    FontSize="Large" 
-                    Margin="20,0,20,0" 
+                    FontSize="Large" Margin="3"
                     CornerRadius="150" 
                     HeightRequest="300" 
                     WidthRequest="300" 
                     Command="{Binding SOS}">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding FrameVisibility}" Value="True">
-                        <Setter Property="Opacity" Value="0.01"/>
-                        <Setter Property="InputTransparent" Value="True"/>
-                    </DataTrigger>
-                    <DataTrigger TargetType="Button" Binding="{Binding FrameVisibility}" Value="False">
-                        <Setter Property="Opacity" Value="1"/>
-                        <Setter Property="InputTransparent" Value="False"/>
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
+                    
+                </Button>
+            </Frame>
         </Grid>
     </Grid>
 </ContentPage>

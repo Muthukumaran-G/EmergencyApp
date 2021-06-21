@@ -50,7 +50,22 @@ namespace EmergencyApp
             }
         }
 
-        
+        private bool isTagVisible;
+
+        public bool IsTagVisible
+        {
+            get
+            {
+                return isTagVisible;
+            }
+            set
+            {
+                isTagVisible = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
 
         public string UserName
         {
@@ -65,11 +80,26 @@ namespace EmergencyApp
             }
         }
 
+        public Placemark address;
+        public Placemark Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                address = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public Command SOS { get; set; }
         public Command AddContactPage { get; set; }
         public Command AboutPage { get; set; }
         public Command Logout { get; set; }
         public Command LogIn { get; set; }
+        public Command NavigateToLocation { get; set; }
         internal Location CurrentLocation { get; set; }
 
 
@@ -81,6 +111,7 @@ namespace EmergencyApp
             AboutPage = new Command(AboutPageCommand);
             Logout = new Command(LogoutCommand);
             LogIn = new Command(LogInCommand);
+            NavigateToLocation = new Command(NavigateToCommand);
             database = DependencyService.Get<ISQLite>().GetConnection();
             // Create the table
             database.CreateTable<RecipientModel>();
@@ -103,6 +134,12 @@ namespace EmergencyApp
             DependencyService.Get<ILocationService>().LocationChanged += App_LocationChanged;
             DependencyService.Get<ILocationService>().GPSStateChanged += App_GPSStateChanged;
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        private async void NavigateToCommand(object obj)
+        {
+            if (CurrentLocation != null)
+                await Address.OpenMapsAsync(new MapLaunchOptions() { Name = "Home", NavigationMode = NavigationMode.Driving });
         }
 
         private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
@@ -229,6 +266,8 @@ namespace EmergencyApp
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Default);
                 CurrentLocation = await Geolocation.GetLocationAsync(request).ConfigureAwait(false);
+                var locations = await Geocoding.GetPlacemarksAsync(CurrentLocation);  
+                Address = locations?.FirstOrDefault();
                 DependencyService.Get<IToastMessage>().ShowToast("Location accquired");
             }
             catch (FeatureNotSupportedException fnsEx)
