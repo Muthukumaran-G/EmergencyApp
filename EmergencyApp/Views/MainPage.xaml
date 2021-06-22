@@ -18,6 +18,9 @@
             </Grid>
         </Frame>
         <Grid x:Name="parentGrid" BackgroundColor="Black">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding BackgroundTapped}"/>
+            </Grid.GestureRecognizers>
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding FrameVisibility}" Value="True">
                     <Setter Property="Opacity" Value="0.1"/>
@@ -33,24 +36,24 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ScrollView Orientation="Horizontal">
-                <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="ElMessiri" TextColor="White" FontSize="20"/>
+                <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="Courgette" TextColor="White" FontSize="20"/>
             </ScrollView>
-            <!--<Image Grid.Column="1" Grid.Row="1" WidthRequest="35"  HeightRequest="35" Margin="20" VerticalOptions="End" HorizontalOptions="End" Source="Directory">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AddContactPage}"/>
-                </Image.GestureRecognizers>
-            </Image>-->
-            <emergencyapp:Blob Grid.Column="1" TapCommand="{Binding AddContactPage}" TagName="Contact List" TagDirection="Left" Grid.Row="1" HeightRequest="35" Margin="20" VerticalOptions="End" HorizontalOptions="End" IconSource="Directory"/>
-
-            <emergencyapp:Blob Grid.Row="1" TapCommand="{Binding AboutPage}" IsTagShown="{Binding IsTagVisible}" IconSource="About" TagName="About" HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" />
-
-            <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="10">
-                <emergencyapp:Blob Grid.Row="1" TapCommand="{Binding Logout}" TagDirection="Left" IconSource="Logout" TagName="Logout" HeightRequest="40" />
-            </StackLayout>
+            <Ellipse />
+            <emergencyapp:Blob Grid.Column="1" x:Name="ContactListBlob" IsTagShown="{Binding ContactTagVisible}"
+                               TapCommand="{Binding AddContactPage}" 
+                               TagName="Contact List" 
+                               TagDirection="Left" 
+                               Grid.Row="1" 
+                               HeightRequest="30" 
+                               Margin="20" 
+                               VerticalOptions="End" HorizontalOptions="End" 
+                               IconSource="Directory"/>
+            <emergencyapp:Blob x:Name="AboutBlob" Grid.Row="1" TapCommand="{Binding AboutPage}" IsTagShown="{Binding AboutTagVisible}" IconSource="About" TagName="About" HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" />
+            <emergencyapp:Blob x:Name="LogoutBlob" Grid.Column="1" HorizontalOptions="End" IsTagShown="{Binding LogoutTagVisible}" VerticalOptions="Center" Margin="10" TapCommand="{Binding Logout}" TagDirection="Left" IconSource="Logout" TagName="Logout" HeightRequest="30" />
             <Frame Grid.ColumnSpan="2" Padding="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center"
                    CornerRadius="150" 
                     HeightRequest="300" 

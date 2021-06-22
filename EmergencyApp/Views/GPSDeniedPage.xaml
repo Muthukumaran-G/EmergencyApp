@@ -30,14 +30,14 @@
 
                 <!--  Label to display header  -->
                 <Label HorizontalOptions="Center" CharacterSpacing="2"
-                    FontSize="20" FontFamily="ElMessiri-Regular"
+                    FontSize="20" FontFamily="Courgette-Regular"
                     Text="Location permission required"
                     TextColor="AliceBlue"
                     VerticalTextAlignment="Center" />
 
                 <!--  Label to display content  -->
                 <Label HorizontalOptions="Center" HorizontalTextAlignment="Center"
-                    FontSize="16" FontFamily="ElMessiri-Regular"
+                    FontSize="16" FontFamily="Courgette-Regular"
                     CharacterSpacing="2"
                     LineHeight="{OnPlatform Android=1.25,
                                             Default=-1}"
@@ -48,7 +48,7 @@
 
             <!--  Try again button  -->
             <Button CornerRadius="25" Margin="20" CharacterSpacing="3" BackgroundColor="Red"
-                Grid.Row="1" FontFamily="ElMessiri-Regular" TextColor="AliceBlue" FontSize="17"
+                Grid.Row="1" FontFamily="Courgette-Regular" TextColor="AliceBlue" FontSize="17"
                 Command="{Binding Retry}"
                 Text="Retry"
                 VerticalOptions="End"

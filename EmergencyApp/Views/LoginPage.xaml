@@ -4,15 +4,15 @@
              x:Class="EmergencyApp.LoginPage" NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid BackgroundColor="OrangeRed">
-            <Label Margin="40" Grid.RowSpan="2" FontFamily="ElMessiri-Regular" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="White" Text="Emergency App" FontSize="25"/>
+            <Label Margin="40" Grid.RowSpan="2" FontFamily="Courgette-Regular" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="White" Text="Emergency App" FontSize="25"/>
             <Frame BackgroundColor="White" BorderColor="PeachPuff" CornerRadius="7" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Scale="11" Rotation="45" TranslationX="-120"/>
             <Image Margin="30" Source="siren.png" HeightRequest="120" WidthRequest="120" HorizontalOptions="Start" VerticalOptions="Center"/>
-            <Label Margin="40" FontFamily="ElMessiri-Regular" HorizontalTextAlignment="Start" VerticalTextAlignment="End" TextColor="Black" Text="New user?" FontSize="Large" FontAttributes="Bold"/>
-            <Entry FontFamily="ElMessiri-Regular" HorizontalOptions="Start" WidthRequest="250" VerticalOptions="Center" Margin="40,60,0,0" Grid.RowSpan="2" Placeholder="Enter user name" Text="{Binding UserName}"/>
+            <Label Margin="40" FontFamily="Courgette-Regular" HorizontalTextAlignment="Start" VerticalTextAlignment="End" TextColor="Black" Text="New user?" FontSize="Large" FontAttributes="Bold"/>
+            <Entry FontFamily="Courgette-Regular" HorizontalOptions="Start" WidthRequest="250" VerticalOptions="Center" Margin="40,60,0,0" Grid.RowSpan="2" Placeholder="Enter user name" Text="{Binding UserName}"/>
             <Frame x:Name="frameGrid" Grid.Row="1" BackgroundColor="Transparent" Margin="20" TranslationY="-20" CornerRadius="50" Padding="0" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="150" >
                 <Grid>
                     <Grid IsVisible="{Binding IsLoginVisible}">
-                        <Button BackgroundColor="Maroon" FontFamily="ElMessiri-Regular"
+                        <Button BackgroundColor="Maroon" FontFamily="Courgette-Regular"
                         Text="E n t e r" FontSize="20"
                         TextColor="White"
                         Command="{Binding LogIn}"/>

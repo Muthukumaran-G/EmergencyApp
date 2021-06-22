@@ -11,12 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ElMessiri-Regular.ttf" />
+    <None Remove="Courgette-Regular.ttf" />
+    <None Remove="Courgette-Regular2.ttf" />
     <None Remove="Images\LocationAccessDenied.svg" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ElMessiri-Regular.ttf" />
+    <EmbeddedResource Include="Courgette-Regular.ttf" />
     <EmbeddedResource Include="Images\LocationAccessDenied.svg" />
   </ItemGroup>
 

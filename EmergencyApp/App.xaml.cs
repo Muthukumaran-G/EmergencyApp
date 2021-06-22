@@ -1,6 +1,8 @@
 using SQLite;
 using System;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -19,7 +21,10 @@ namespace EmergencyApp
         public App()
         {
             InitializeComponent();
-            
+            var userSelectedCulture = new CultureInfo("fr-FR");
+
+            Thread.CurrentThread.CurrentCulture = userSelectedCulture;
+
             var viewModel = new ViewModel();
 
             if (string.IsNullOrEmpty(viewModel.UserName))

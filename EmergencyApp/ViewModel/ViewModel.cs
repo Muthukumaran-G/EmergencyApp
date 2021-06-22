@@ -50,22 +50,65 @@ namespace EmergencyApp
             }
         }
 
-        private bool isTagVisible;
+        private bool contactTagVisible;
 
-        public bool IsTagVisible
+        public bool ContactTagVisible
         {
             get
             {
-                return isTagVisible;
+                return contactTagVisible;
             }
             set
             {
-                isTagVisible = value;
+                contactTagVisible = value;
                 RaisePropertyChanged();
+                if(contactTagVisible)
+                {
+                    AboutTagVisible = false;
+                    LogoutTagVisible = false;
+                }
             }
         }
 
+        private bool aboutTagVisible;
 
+        public bool AboutTagVisible
+        {
+            get
+            {
+                return aboutTagVisible;
+            }
+            set
+            {
+                aboutTagVisible = value;
+                RaisePropertyChanged();
+                if(aboutTagVisible)
+                {
+                    ContactTagVisible = false;
+                    LogoutTagVisible = false;
+                }
+            }
+        }
+
+        private bool logoutTagVisible;
+
+        public bool LogoutTagVisible
+        {
+            get
+            {
+                return logoutTagVisible;
+            }
+            set
+            {
+                logoutTagVisible = value;
+                RaisePropertyChanged();
+                if(logoutTagVisible)
+                {
+                    AboutTagVisible = false;
+                    ContactTagVisible = false;
+                }
+            }
+        }
 
         public string UserName
         {
@@ -100,6 +143,7 @@ namespace EmergencyApp
         public Command Logout { get; set; }
         public Command LogIn { get; set; }
         public Command NavigateToLocation { get; set; }
+        public Command BackgroundTapped { get; set; }
         internal Location CurrentLocation { get; set; }
 
 
@@ -112,6 +156,7 @@ namespace EmergencyApp
             Logout = new Command(LogoutCommand);
             LogIn = new Command(LogInCommand);
             NavigateToLocation = new Command(NavigateToCommand);
+            BackgroundTapped = new Command(BackgroundTappedCommand);
             database = DependencyService.Get<ISQLite>().GetConnection();
             // Create the table
             database.CreateTable<RecipientModel>();
@@ -134,6 +179,13 @@ namespace EmergencyApp
             DependencyService.Get<ILocationService>().LocationChanged += App_LocationChanged;
             DependencyService.Get<ILocationService>().GPSStateChanged += App_GPSStateChanged;
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        private void BackgroundTappedCommand(object obj)
+        {
+            AboutTagVisible = false;
+            ContactTagVisible = false;
+            LogoutTagVisible = false;
         }
 
         private async void NavigateToCommand(object obj)
