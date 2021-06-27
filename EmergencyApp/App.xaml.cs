@@ -21,9 +21,6 @@ namespace EmergencyApp
         public App()
         {
             InitializeComponent();
-            var userSelectedCulture = new CultureInfo("fr-FR");
-
-            Thread.CurrentThread.CurrentCulture = userSelectedCulture;
 
             var viewModel = new ViewModel();
 

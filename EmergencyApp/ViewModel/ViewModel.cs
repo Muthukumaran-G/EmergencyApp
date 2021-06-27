@@ -62,10 +62,12 @@ namespace EmergencyApp
             {
                 contactTagVisible = value;
                 RaisePropertyChanged();
-                if(contactTagVisible)
+                if (contactTagVisible)
                 {
                     AboutTagVisible = false;
                     LogoutTagVisible = false;
+                    HelpTextTagVisible = false;
+                    TranslateTagVisible = false;
                 }
             }
         }
@@ -86,6 +88,9 @@ namespace EmergencyApp
                 {
                     ContactTagVisible = false;
                     LogoutTagVisible = false;
+                    HelpTextTagVisible = false;
+                    TranslateTagVisible = false;
+                    MessagingCenter.Send<object, string>(this, "BackgroundTapped", "AboutTagVisible");
                 }
             }
         }
@@ -106,6 +111,53 @@ namespace EmergencyApp
                 {
                     AboutTagVisible = false;
                     ContactTagVisible = false;
+                    HelpTextTagVisible = false;
+                    TranslateTagVisible = false;
+                    MessagingCenter.Send<object, string>(this, "BackgroundTapped", "LogoutTagVisible");
+                }
+            }
+        }
+
+        private bool helpTextTagVisible;
+
+        public bool HelpTextTagVisible
+        {
+            get
+            {
+                return helpTextTagVisible;
+            }
+            set
+            {
+                helpTextTagVisible = value;
+                RaisePropertyChanged();
+                if (helpTextTagVisible)
+                {
+                    AboutTagVisible = false;
+                    ContactTagVisible = false;
+                    LogoutTagVisible = false;
+                    TranslateTagVisible = false;
+                }
+            }
+        }
+
+        private bool translateTagVisible;
+
+        public bool TranslateTagVisible
+        {
+            get
+            {
+                return translateTagVisible;
+            }
+            set
+            {
+                translateTagVisible = value;
+                RaisePropertyChanged();
+                if (translateTagVisible)
+                {
+                    AboutTagVisible = false;
+                    ContactTagVisible = false;
+                    HelpTextTagVisible = false;
+                    LogoutTagVisible = false;
                 }
             }
         }
@@ -186,6 +238,9 @@ namespace EmergencyApp
             AboutTagVisible = false;
             ContactTagVisible = false;
             LogoutTagVisible = false;
+            HelpTextTagVisible = false;
+            TranslateTagVisible = false;
+            MessagingCenter.Send<object, string>(this, "BackgroundTapped", "Background");
         }
 
         private async void NavigateToCommand(object obj)
@@ -271,7 +326,7 @@ namespace EmergencyApp
 
         private void AddContactPageCommand(object obj)
         {
-            App.Current.MainPage.Navigation.PushModalAsync(new AddRecipients());
+            App.Current.MainPage.Navigation.PushAsync(new AddRecipients());
         }
 
         private async void SosCommand(object obj)

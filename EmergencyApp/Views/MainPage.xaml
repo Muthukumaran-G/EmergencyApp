@@ -6,6 +6,11 @@
              mc:Ignorable="d"
              x:Class="EmergencyApp.MainPage" NavigationPage.HasNavigationBar="False"
              FlowDirection="{x:Static Device.FlowDirection}">
+
+    <ContentPage.Behaviors>
+        <emergencyapp:HomePageBehavior/>
+    </ContentPage.Behaviors>
+    
     <Grid>
         <Frame IsVisible="{Binding FrameVisibility}" BackgroundColor="#d3d3d3" HasShadow="True">
             <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -36,14 +41,30 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ScrollView Orientation="Horizontal">
                 <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="Courgette" TextColor="White" FontSize="20"/>
             </ScrollView>
             <Ellipse />
-            <emergencyapp:Blob Grid.Column="1" x:Name="ContactListBlob" IsTagShown="{Binding ContactTagVisible}"
+            <Frame Grid.ColumnSpan="2" x:Name="Settings" Padding="0" CornerRadius="20"
+                               Grid.Row="1" 
+                               HeightRequest="30" 
+                               Margin="20" 
+                               VerticalOptions="End" HorizontalOptions="End">
+                <Image Source="Settings" Margin="1.5"/>
+            </Frame>
+            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="HelpTextBlob" IsVisible="false" Opacity="0" Scale="0" IsTagShown="{Binding HelpTextTagVisible}"
+                               TapCommand="{Binding AddContactPage}" 
+                               TagName="Help Text" 
+                               TagDirection="Left" 
+                               Grid.Row="1" 
+                               HeightRequest="30" 
+                               Margin="20" 
+                               VerticalOptions="End" HorizontalOptions="End" 
+                               IconSource="Message"/>
+            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="ContactListBlob" IsVisible="false" Opacity="0" Scale="0" IsTagShown="{Binding ContactTagVisible}"
                                TapCommand="{Binding AddContactPage}" 
                                TagName="Contact List" 
                                TagDirection="Left" 
@@ -52,6 +73,16 @@
                                Margin="20" 
                                VerticalOptions="End" HorizontalOptions="End" 
                                IconSource="Directory"/>
+            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="TranslateBlob" IsVisible="false" Opacity="0" Scale="0" IsTagShown="{Binding TranslateTagVisible}"
+                               TapCommand="{Binding AddContactPage}" 
+                               TagName="Translate" 
+                               TagDirection="Left" 
+                               Grid.Row="1" 
+                               HeightRequest="30" 
+                               Margin="20" 
+                               VerticalOptions="End" HorizontalOptions="End" 
+                               IconSource="Translate"/>
+            
             <emergencyapp:Blob x:Name="AboutBlob" Grid.Row="1" TapCommand="{Binding AboutPage}" IsTagShown="{Binding AboutTagVisible}" IconSource="About" TagName="About" HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" />
             <emergencyapp:Blob x:Name="LogoutBlob" Grid.Column="1" HorizontalOptions="End" IsTagShown="{Binding LogoutTagVisible}" VerticalOptions="Center" Margin="10" TapCommand="{Binding Logout}" TagDirection="Left" IconSource="Logout" TagName="Logout" HeightRequest="30" />
             <Frame Grid.ColumnSpan="2" Padding="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center"

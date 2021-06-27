@@ -287,6 +287,8 @@ namespace EmergencyApp
         private void BackgroundGestureCommand(object obj)
         {
             ShowPopup = false;
+            IsNumberEmpty = false;
+            IsNameEmpty = false;
         }
 
         private void DoneCommand(object obj)
