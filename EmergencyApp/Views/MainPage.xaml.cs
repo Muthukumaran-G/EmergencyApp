@@ -35,7 +35,7 @@ namespace EmergencyApp
             }
             catch(Exception ex)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("Enable GPS.");
+                DependencyService.Get<IToastMessage>().ShowToast(Resx.EmergencyAppResources.EnableGPS);
             }
         }
 
@@ -47,7 +47,7 @@ namespace EmergencyApp
             if (previousTime == 0 || currentTime - previousTime > 7)
             {
                 previousTime = currentTime;
-                DependencyService.Get<IToastMessage>().ShowToast("Press back again to close");
+                DependencyService.Get<IToastMessage>().ShowToast(Resx.EmergencyAppResources.Close);
                 return true;
             }
             else
@@ -55,6 +55,11 @@ namespace EmergencyApp
                 previousTime = 0;
                 return base.OnBackButtonPressed();
             }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+
         }
     }
 }

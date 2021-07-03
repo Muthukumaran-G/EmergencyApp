@@ -6,6 +6,7 @@
              xmlns:emergencyapp="clr-namespace:EmergencyApp"
              mc:Ignorable="d"
              x:Class="EmergencyApp.AddRecipients"
+             xmlns:resx="clr-namespace:EmergencyApp.Resx"
              BackgroundColor="Black" NavigationPage.HasNavigationBar="False"
              FlowDirection="{x:Static Device.FlowDirection}">
 
@@ -30,7 +31,6 @@
                     <Button Text="Contacts" Clicked="Button_Clicked"/>
                 </StackLayout>-->
                 <Grid>
-                    <Label x:Name="label" FontFamily="Courgette-Regular" TextColor="White" FontSize="20" Text="{Binding ListTitle}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
                     <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="End" Grid.Column="1">
                         <Image Source="Telephone" Margin="8" WidthRequest="40" HeightRequest="40">
                             <Image.GestureRecognizers>
@@ -56,6 +56,9 @@
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"  ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
+                    <CollectionView.EmptyView>
+                        <Label x:Name="label" FontFamily="Courgette-Regular" TextColor="White" FontSize="20" Text="{x:Static resx:EmergencyAppResources.NoRecipient}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                    </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <SwipeView>
@@ -65,7 +68,7 @@
                                             <Frame BackgroundColor="Transparent" BorderColor="Wheat" HasShadow="True" CornerRadius="5">
                                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" WidthRequest="70">
                                                     <Image Source="Edit"/>
-                                                    <Label Text="Edit" FontFamily="Courgette-Regular" TextColor="Wheat"/>
+                                                    <Label Text="{x:Static resx:EmergencyAppResources.EditContact}" FontFamily="Courgette-Regular" TextColor="Wheat"/>
                                                 </StackLayout>
                                             </Frame>
                                         </SwipeItemView>
@@ -78,7 +81,7 @@
                                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type emergencyapp:RecipientsViewModel}}, Path=DeleteInvoked}" CommandParameter="{Binding}"/>
                                             </Frame.GestureRecognizers>-->
                                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" WidthRequest="70">
-                                                <Label Text="Delete" FontFamily="Courgette-Regular" TextColor="Red"/>
+                                                <Label Text="{x:Static resx:EmergencyAppResources.DeleteContact}" FontFamily="Courgette-Regular" TextColor="Red"/>
                                                 <Image Source="Delete"/>
                                             </StackLayout>
                                         </Frame>
@@ -107,17 +110,17 @@
                     <ImageButton Source="Close" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" Padding="5" Margin="0,0,15,0" BackgroundColor="Red" CornerRadius="15" Command="{Binding BackgroundGesture}"/>
                     <Grid Grid.Row="1" Margin="15,2,15,2">
                         <Frame BackgroundColor="AliceBlue" CornerRadius="5"/>
-                        <Label x:Name="nameLabel" WidthRequest="70" Text="Name" CharacterSpacing="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6" FontFamily="Courgette-Regular"/>
+                        <Label x:Name="nameLabel" WidthRequest="70" Text="{x:Static resx:EmergencyAppResources.Name}" CharacterSpacing="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6" FontFamily="Courgette-Regular"/>
                         <Entry x:Name="nameEntry" Text="{Binding RecipientName}" VerticalTextAlignment="End" FontSize="13" FontFamily="Courgette-Regular" ClearButtonVisibility="WhileEditing" CharacterSpacing="3"/>
-                        <Label IsVisible="{Binding IsNameEmpty}" FontSize="9" Margin="5,0,0,0" HorizontalOptions="Start" VerticalOptions="End" TranslationY="3" WidthRequest="120" Text="Please enter the name" TextColor="Red"/>
+                        <Label IsVisible="{Binding IsNameEmpty}" FontSize="9" Margin="5,0,0,0" HorizontalOptions="Start" VerticalOptions="End" TranslationY="3" WidthRequest="120" Text="{x:Static resx:EmergencyAppResources.MissingName}" TextColor="Red"/>
                     </Grid>
                     <Grid Grid.Row="2" Margin="15,2,15,2">
                         <Frame BackgroundColor="AliceBlue" CornerRadius="5"/>
-                        <Label x:Name="numberLabel" WidthRequest="70" Text="Number with pin" CharacterSpacing="1" FontFamily="Courgette-Regular" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6"/>
+                        <Label x:Name="numberLabel" WidthRequest="70" Text="{x:Static resx:EmergencyAppResources.NumberWithPin}" CharacterSpacing="1" FontFamily="Courgette-Regular" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6"/>
                         <Entry x:Name="numberEntry" Text="{Binding RecipientNumber}" VerticalTextAlignment="End" FontSize="13"  Keyboard="Telephone" ClearButtonVisibility="WhileEditing" FontFamily="Courgette-Regular" CharacterSpacing="2"/>
-                        <Label IsVisible="{Binding IsNumberEmpty}" FontSize="9" HorizontalOptions="Start" VerticalOptions="End" Margin="5,0,0,0" TranslationY="3" WidthRequest="120" Text="Please enter the number" TextColor="Red"/>
+                        <Label IsVisible="{Binding IsNumberEmpty}" FontSize="9" HorizontalOptions="Start" VerticalOptions="End" Margin="5,0,0,0" TranslationY="3" WidthRequest="120" Text="{x:Static resx:EmergencyAppResources.MissingNumber}" TextColor="Red"/>
                     </Grid>
-                    <Button Text="Done" TextColor="White" Padding="0" CharacterSpacing="3" BackgroundColor="DodgerBlue" CornerRadius="25" FontFamily="Courgette-Regular" Margin="5,7,20,9" Grid.Row="3" HorizontalOptions="End" Command="{Binding Done}"/>
+                    <Button Text="{x:Static resx:EmergencyAppResources.Done}" TextColor="White" Padding="0" CharacterSpacing="3" BackgroundColor="DodgerBlue" CornerRadius="25" FontFamily="Courgette-Regular" Margin="5,7,20,9" Grid.Row="3" HorizontalOptions="End" Command="{Binding Done}"/>
                 </Grid>
             </Frame>
         </Grid>

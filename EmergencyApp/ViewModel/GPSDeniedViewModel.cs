@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmergencyApp.Resx;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 
 namespace EmergencyApp
 {
-    public class GPSDeniedViewModel: NotificationObject
+    public class GPSDeniedViewModel : NotificationObject
     {
         private string imagePath;
 
@@ -57,24 +58,24 @@ namespace EmergencyApp
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Default);
                 CurrentLocation = await Geolocation.GetLocationAsync(request).ConfigureAwait(false);
-                DependencyService.Get<IToastMessage>().ShowToast("Location accquired");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.LocationAccquired);
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("GPS not supported");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.GPSNotSupported);
             }
             catch (FeatureNotEnabledException fneEx)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("GPS not enabled");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.GPSNotEnabled);
             }
             catch (PermissionException pEx)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("Permission denied");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.PermissionDenied);
                 //await App.Current.MainPage.Navigation.PushAsync(new GPSDeniedPage());
             }
             catch (Exception ex)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("Unable to get location. Check connection.");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.CheckConnection);
             }
 
             return CurrentLocation;

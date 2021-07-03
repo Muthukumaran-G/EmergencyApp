@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:emergencyapp="clr-namespace:EmergencyApp"
              mc:Ignorable="d"
              x:Class="EmergencyApp.MainPage" NavigationPage.HasNavigationBar="False"
+             xmlns:resx="clr-namespace:EmergencyApp.Resx"
              FlowDirection="{x:Static Device.FlowDirection}">
 
     <ContentPage.Behaviors>
@@ -23,12 +24,9 @@
             </Grid>
         </Frame>
         <Grid x:Name="parentGrid" BackgroundColor="Black">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding BackgroundTapped}"/>
-            </Grid.GestureRecognizers>
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding FrameVisibility}" Value="True">
-                    <Setter Property="Opacity" Value="0.1"/>
+                    <Setter Property="Opacity" Value="0.01"/>
                     <Setter Property="InputTransparent" Value="True"/>
                 </DataTrigger>
                 <DataTrigger TargetType="Grid" Binding="{Binding FrameVisibility}" Value="False">
@@ -36,6 +34,9 @@
                     <Setter Property="InputTransparent" Value="False"/>
                 </DataTrigger>
             </Grid.Triggers>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding BackgroundTapped}"/>
+            </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -51,44 +52,72 @@
             <Frame Grid.ColumnSpan="2" x:Name="Settings" Padding="0" CornerRadius="20"
                                Grid.Row="1" 
                                HeightRequest="30" 
-                               Margin="20" 
+                               Margin="30" 
                                VerticalOptions="End" HorizontalOptions="End">
                 <Image Source="Settings" Margin="1.5"/>
             </Frame>
-            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="HelpTextBlob" IsVisible="false" Opacity="0" Scale="0" IsTagShown="{Binding HelpTextTagVisible}"
-                               TapCommand="{Binding AddContactPage}" 
-                               TagName="Help Text" 
+            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="HelpTextBlob" Scale="0" Opacity="0" IsTagShown="{Binding HelpTextTagVisible}"
+                               TapCommand="{Binding HelpTextPage}" 
+                               TagName="{x:Static resx:EmergencyAppResources.HelpText}" 
                                TagDirection="Left" 
                                Grid.Row="1" 
                                HeightRequest="30" 
-                               Margin="20" 
                                VerticalOptions="End" HorizontalOptions="End" 
                                IconSource="Message"/>
-            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="ContactListBlob" IsVisible="false" Opacity="0" Scale="0" IsTagShown="{Binding ContactTagVisible}"
+            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="ContactListBlob" Scale="0" Opacity="0" IsTagShown="{Binding ContactTagVisible}"
                                TapCommand="{Binding AddContactPage}" 
-                               TagName="Contact List" 
+                               TagName="{x:Static resx:EmergencyAppResources.ContactList}" 
                                TagDirection="Left" 
                                Grid.Row="1" 
                                HeightRequest="30" 
-                               Margin="20" 
                                VerticalOptions="End" HorizontalOptions="End" 
                                IconSource="Directory"/>
-            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="TranslateBlob" IsVisible="false" Opacity="0" Scale="0" IsTagShown="{Binding TranslateTagVisible}"
-                               TapCommand="{Binding AddContactPage}" 
-                               TagName="Translate" 
+            <emergencyapp:Blob Grid.ColumnSpan="2" x:Name="TranslateBlob" Scale="0" Opacity="0" IsTagShown="{Binding TranslateTagVisible}"
+                               TapCommand="{Binding Translate}" 
+                               TagName="{x:Static resx:EmergencyAppResources.Language}" 
                                TagDirection="Left" 
                                Grid.Row="1" 
                                HeightRequest="30" 
-                               Margin="20" 
                                VerticalOptions="End" HorizontalOptions="End" 
                                IconSource="Translate"/>
-            
-            <emergencyapp:Blob x:Name="AboutBlob" Grid.Row="1" TapCommand="{Binding AboutPage}" IsTagShown="{Binding AboutTagVisible}" IconSource="About" TagName="About" HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" />
-            <emergencyapp:Blob x:Name="LogoutBlob" Grid.Column="1" HorizontalOptions="End" IsTagShown="{Binding LogoutTagVisible}" VerticalOptions="Center" Margin="10" TapCommand="{Binding Logout}" TagDirection="Left" IconSource="Logout" TagName="Logout" HeightRequest="30" />
+
+            <emergencyapp:Blob x:Name="AboutBlob" Grid.Row="1" TapCommand="{Binding AboutPage}" IsTagShown="{Binding AboutTagVisible}" IconSource="About" TagName="{x:Static resx:EmergencyAppResources.About}" HeightRequest="30" Margin="20" VerticalOptions="End" HorizontalOptions="Start" />
+            <emergencyapp:Blob x:Name="LogoutBlob" Grid.Column="1" HorizontalOptions="End" IsTagShown="{Binding LogoutTagVisible}" VerticalOptions="Center" Margin="10" TapCommand="{Binding Logout}" TagDirection="Left" IconSource="Logout" TagName="{x:Static resx:EmergencyAppResources.Logout}" HeightRequest="30" />
             <Frame Grid.ColumnSpan="2" Padding="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center"
                    CornerRadius="150" 
                     HeightRequest="300" 
                     WidthRequest="300">
+                <Frame.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="Gray"
+                          Offset="0.9"/>
+                        <GradientStop Color="black"
+                          Offset="1"/>
+                        <GradientStop Color="white"
+                          Offset="0.3"/>
+                        <GradientStop Color="black"
+                          Offset="0.1"/>
+                                                    <GradientStop Color="Gray"
+                          Offset="1.0"/>
+
+                    </RadialGradientBrush>
+                </Frame.Background>
                 <Frame.Triggers>
                     <DataTrigger TargetType="Frame" Binding="{Binding FrameVisibility}" Value="True">
                         <Setter Property="Opacity" Value="0.01"/>
@@ -99,17 +128,100 @@
                         <Setter Property="InputTransparent" Value="False"/>
                     </DataTrigger>
                 </Frame.Triggers>
-                <Button Text="S O S" Grid.ColumnSpan="2" Grid.RowSpan="2" TextColor="White"
+                <Button Grid.ColumnSpan="2" Grid.RowSpan="2" TextColor="White" 
                     HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold"
-                    BackgroundColor="Red" 
-                    FontSize="Large" Margin="3"
+                    FontSize="Large" Margin="20"
                     CornerRadius="150" 
                     HeightRequest="300" 
                     WidthRequest="300" 
                     Command="{Binding SOS}">
-                    
+                    <Button.Background>
+                        <RadialGradientBrush>
+                            <!--<GradientStop Color="Red" Offset="0.7"/>
+                            <GradientStop Color="Red" Offset="0.6"/>
+                            <GradientStop Color="DarkRed" Offset="0.9"/>
+                            <GradientStop Color="DarkRed" Offset="0.8"/>-->
+                            <GradientStop Color="Red" Offset="0.7"/>
+                            <GradientStop Color="Maroon" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Button.Background>
                 </Button>
             </Frame>
         </Grid>
+        <Frame x:Name="frame" IsEnabled="{Binding ShowLanguagePopup}" CornerRadius="25" Padding="0" Scale="0" HeightRequest="260" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label BackgroundColor="DodgerBlue" Text="{x:Static resx:EmergencyAppResources.Language}" CharacterSpacing="3" VerticalTextAlignment="Center" TextColor="White" Padding="15" FontFamily="Courgette-Regular" TextTransform="Uppercase"/>
+                <ImageButton Source="Close" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" Padding="5" Margin="0,0,15,0" BackgroundColor="Red" CornerRadius="15" Command="{Binding LanguageChanged}"/>
+                <ScrollView Margin="10" VerticalScrollBarVisibility="Never" Grid.Row="1">
+                    <StackLayout Spacing="10" BindableLayout.ItemsSource="{Binding LanguageList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="5" Margin="10,0,10,0" CornerRadius="10">
+                                    <Frame.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Frame" Value="True">
+                                            <Setter Property="Background">
+                                                    <!--<LinearGradientBrush StartPoint="0,0"
+                             EndPoint="0,1">
+                                                        <GradientStop Color="Blue"
+                          Offset="0.05"/>
+                                                        <GradientStop Color="LightGray"
+                          Offset="0.1"/>
+                                                        <GradientStop Color="LightSlateGray"
+                          Offset="1.0"/>
+                                                        <GradientStop Color="Blue"
+                          Offset="0.05"/>
+                                                    </LinearGradientBrush>-->
+                                                <RadialGradientBrush Radius="0.8">
+                                                    <GradientStop Color="LightSlateGray"
+                          Offset="0.3"/>
+                                                    <GradientStop Color="DeepSkyBlue"
+                          Offset="0.05"/>
+                                                </RadialGradientBrush>
+                                            </Setter>
+                                            <Setter Property="BorderColor" Value="Cyan"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Frame" Value="False">
+                                            <Setter Property="Background">
+                                                <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="0,1">
+                                                    <GradientStop Color="LightGray"
+                          Offset="0.1"/>
+                                                    <GradientStop Color="LightSlateGray"
+                          Offset="1.0"/>
+                                                    <GradientStop Color="LightGray"
+                          Offset="1.0"/>
+                                                </LinearGradientBrush>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding BindingContext.LanguageChanged, Source={x:Reference frame}}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding Language}" TextColor="AliceBlue" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Courgette-Regular"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
+                
+                <!--<CollectionView x:Name="collectionView" Grid.Row="1" ItemsUpdatingScrollMode="KeepItemsInView" ItemsSource="{Binding LanguageList}" SelectionMode="Single" Margin="10" SelectedItem="{Binding SelectedLanguage}" SelectionChangedCommand="{Binding LanguageChanged}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="20" CornerRadius="10" BackgroundColor="Transparent" Padding="0">
+                                <Label Text="{Binding Language}" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Courgette-Regular"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>-->
+            </Grid>
+        </Frame>
     </Grid>
 </ContentPage>

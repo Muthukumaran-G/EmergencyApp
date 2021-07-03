@@ -4,6 +4,7 @@
              xmlns:app="clr-namespace:EmergencyApp"
              x:Class="EmergencyApp.GPSDeniedPage"
              NavigationPage.HasNavigationBar="False"
+             xmlns:resx="clr-namespace:EmergencyApp.Resx"
              BackgroundColor="LightSeaGreen">
     <ContentPage.BindingContext>
         <app:GPSDeniedViewModel/>
@@ -31,7 +32,7 @@
                 <!--  Label to display header  -->
                 <Label HorizontalOptions="Center" CharacterSpacing="2"
                     FontSize="20" FontFamily="Courgette-Regular"
-                    Text="Location permission required"
+                    Text="{x:Static resx:EmergencyAppResources.LocationDenied}"
                     TextColor="AliceBlue"
                     VerticalTextAlignment="Center" />
 
@@ -41,7 +42,7 @@
                     CharacterSpacing="2"
                     LineHeight="{OnPlatform Android=1.25,
                                             Default=-1}"
-                    Text="Allow app to automatically detect your location to share with your recipients."
+                    Text="{x:Static resx:EmergencyAppResources.LocationPermissionRequired}"
                     TextColor="AliceBlue"
                     VerticalTextAlignment="Center" />
             </StackLayout>
@@ -50,7 +51,7 @@
             <Button CornerRadius="25" Margin="20" CharacterSpacing="3" BackgroundColor="Red"
                 Grid.Row="1" FontFamily="Courgette-Regular" TextColor="AliceBlue" FontSize="17"
                 Command="{Binding Retry}"
-                Text="Retry"
+                Text="{x:Static resx:EmergencyAppResources.Retry}"
                 VerticalOptions="End"
                 WidthRequest="245" />
 

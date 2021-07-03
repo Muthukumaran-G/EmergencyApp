@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>గురించి</value>
+  </data>
+  <data name="AlertMessage" xml:space="preserve">
+    <value>మీరు ఖచ్చితంగా భాషా సెట్టింగులను మార్చాలనుకుంటున్నారా?</value>
+  </data>
+  <data name="AlertTitle" xml:space="preserve">
+    <value>భాష సెట్టింగులు</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>రద్దు చేయండి</value>
+  </data>
+  <data name="CheckConnection" xml:space="preserve">
+    <value>స్థానం పొందడం సాధ్యం కాలేదు. కనెక్షన్‌ను తనిఖీ చేయండి.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>మూసివేయడానికి మళ్ళీ నొక్కండి</value>
+  </data>
+  <data name="ContactAccessDenied" xml:space="preserve">
+    <value>సంప్రదింపు ప్రాప్యత తిరస్కరించబడింది</value>
+  </data>
+  <data name="ContactList" xml:space="preserve">
+    <value>సంప్రదింపు జాబితా</value>
+  </data>
+  <data name="DeleteContact" xml:space="preserve">
+    <value>తొలగించు</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>పూర్తి</value>
+  </data>
+  <data name="EditContact" xml:space="preserve">
+    <value>సవరించండి</value>
+  </data>
+  <data name="EditHere" xml:space="preserve">
+    <value>ఇక్కడ సవరించండి</value>
+  </data>
+  <data name="EnableGPS" xml:space="preserve">
+    <value>GPS ని ప్రారంభించండి</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>నమోదు చేయండి</value>
+  </data>
+  <data name="GPSDisabled" xml:space="preserve">
+    <value>GPS నిలిపివేయబడింది</value>
+  </data>
+  <data name="GPSEnabled" xml:space="preserve">
+    <value>GPS ప్రారంభించబడింది</value>
+  </data>
+  <data name="GPSNotEnabled" xml:space="preserve">
+    <value>GPS ప్రారంభించబడలేదు</value>
+  </data>
+  <data name="GPSNotSupported" xml:space="preserve">
+    <value>GPS కి మద్దతు లేదు</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>హలో</value>
+  </data>
+  <data name="HelpText" xml:space="preserve">
+    <value>సహాయం టెక్స్ట్</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>భాష</value>
+  </data>
+  <data name="LocationAccquired" xml:space="preserve">
+    <value>స్థానం సంపాదించబడింది</value>
+  </data>
+  <data name="LocationDenied" xml:space="preserve">
+    <value>మీ గ్రహీతలతో భాగస్వామ్యం చేయడానికి మీ స్థానాన్ని స్వయంచాలకంగా గుర్తించడానికి అనువర్తనాన్ని అనుమతించండి.</value>
+  </data>
+  <data name="LocationPermissionRequired" xml:space="preserve">
+    <value>స్థాన ప్రాప్యత అనుమతి అవసరం</value>
+  </data>
+  <data name="LocationUpdated" xml:space="preserve">
+    <value>స్థానం నవీకరించబడింది</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>లాగ్ అవుట్</value>
+  </data>
+  <data name="LogoutSuccess" xml:space="preserve">
+    <value>లాగ్అవుట్ విజయవంతమైంది. ఖాతా విజయవంతంగా తొలగించబడింది.</value>
+  </data>
+  <data name="MissingName" xml:space="preserve">
+    <value>దయచేసి పేరును నమోదు చేయండి</value>
+  </data>
+  <data name="MissingNumber" xml:space="preserve">
+    <value>దయచేసి సంఖ్యను నమోదు చేయండి</value>
+  </data>
+  <data name="MissingUserName" xml:space="preserve">
+    <value>దయచేసి వినియోగదారు పేరును నమోదు చేయండి</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>పేరు</value>
+  </data>
+  <data name="NetworkConnected" xml:space="preserve">
+    <value>నెట్‌వర్క్ కనెక్ట్ చేయబడింది</value>
+  </data>
+  <data name="NetworkDisconnected" xml:space="preserve">
+    <value>నెట్‌వర్క్ డిస్‌కనెక్ట్ చేయబడింది</value>
+  </data>
+  <data name="NewUser" xml:space="preserve">
+    <value>క్రొత్త వినియోగదారు?</value>
+  </data>
+  <data name="NoRecipient" xml:space="preserve">
+    <value>గ్రహీత ఏదీ జోడించబడలేదు ..!</value>
+  </data>
+  <data name="NoRecipients" xml:space="preserve">
+    <value>గ్రహీతలు లేరు.</value>
+  </data>
+  <data name="NumberWithPin" xml:space="preserve">
+    <value>పిన్‌తో సంఖ్య</value>
+  </data>
+  <data name="Okay" xml:space="preserve">
+    <value>అలాగే</value>
+  </data>
+  <data name="PermissionDenied" xml:space="preserve">
+    <value>అనుమతి నిరాకరించబడింది</value>
+  </data>
+  <data name="PhoneContactAdded" xml:space="preserve">
+    <value>ఫోన్‌బుక్ నుండి క్రొత్త గ్రహీత జోడించబడింది.</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>పరిదృశ్యం</value>
+  </data>
+  <data name="RecipientAdded" xml:space="preserve">
+    <value>క్రొత్త గ్రహీత జోడించబడింది.</value>
+  </data>
+  <data name="RecipientDeleted" xml:space="preserve">
+    <value>గ్రహీత తొలగించబడింది</value>
+  </data>
+  <data name="RecipientUpdated" xml:space="preserve">
+    <value>స్వీకర్త వివరాలు నవీకరించబడ్డాయి.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>మళ్లీ ప్రయత్నించండి</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>విజయం</value>
+  </data>
+  <data name="TryAddContact" xml:space="preserve">
+    <value>గ్రహీతను జోడించడం సాధ్యం కాలేదు, దయచేసి మళ్ళీ జోడించడానికి ప్రయత్నించండి.</value>
+  </data>
+  <data name="TryDeleteContact" xml:space="preserve">
+    <value>పరిచయాన్ని తొలగించడం సాధ్యం కాలేదు, దయచేసి మళ్ళీ ప్రయత్నించండి.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>అవును</value>
+  </data>
+</root>

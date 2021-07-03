@@ -38,9 +38,17 @@ namespace EmergencyApp
                 RaisePropertyChanged();
             }
         }
+    }
 
-        public string UserName
-        {
+    public class User : NotificationObject
+    {
+        private string userName;
+        private string helpText;
+        private string language;
+        private bool isSelected;
+
+        [PrimaryKey]
+        public string UserName {
             get
             {
                 return userName;
@@ -51,11 +59,44 @@ namespace EmergencyApp
                 RaisePropertyChanged();
             }
         }
-    }
 
-    public class User
-    {
-        [PrimaryKey]
-        public string UserName { get; set; }
+        public string HelpText
+        {
+            get
+            {
+                return helpText;
+            }
+            set
+            {
+                helpText = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Language
+        {
+            get
+            {
+                return language;
+            }
+            set
+            {
+                language = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+            set
+            {
+                isSelected = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

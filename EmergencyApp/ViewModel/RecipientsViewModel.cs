@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmergencyApp.Resx;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -208,7 +209,7 @@ namespace EmergencyApp
             if (contactAccess != PermissionStatus.Granted)
             {
                 this.IsAccessDenied = true;
-                DependencyService.Get<IToastMessage>().ShowToast("Contact access denied.");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.ContactAccessDenied);
             }
             else
             {
@@ -266,11 +267,11 @@ namespace EmergencyApp
                 else
                     ListTitle = "No contact added..!";
 
-                DependencyService.Get<IToastMessage>().ShowToast("Recipient deleted.");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.DeleteContact);
             }
             catch (Exception ex)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("Unable to delete contact, please try again.");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.TryDeleteContact);
             }
         }
 
@@ -312,7 +313,7 @@ namespace EmergencyApp
                     EditContactDetails.RecipientName = this.RecipientName;
                     EditContactDetails.RecipientNumber = this.RecipientNumber;
                     database.Update(EditContactDetails);
-                    DependencyService.Get<IToastMessage>().ShowToast("Recipient details updated.");
+                    DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.RecipientUpdated);
 
                 }
                 else
@@ -327,7 +328,7 @@ namespace EmergencyApp
                         contactNames[i] = OrderList[i].RecipientNumber;
                     }
 
-                    DependencyService.Get<IToastMessage>().ShowToast("New recipient added.");
+                    DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.RecipientAdded);
                 }
 
                 this.RecipientName = string.Empty;
@@ -338,7 +339,7 @@ namespace EmergencyApp
             }
             catch (Exception ex)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("Unable to add contact, please try adding again.");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.TryAddContact);
                 ShowPopup = false;
             }
         }
@@ -371,13 +372,13 @@ namespace EmergencyApp
                     contactNames[i] = OrderList[i].RecipientNumber;
                 }
 
-                DependencyService.Get<IToastMessage>().ShowToast("New recipient added from phonebook.");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.PhoneContactAdded);
 
                 ListTitle = "Added Contacts";
             }
             catch (Exception ex)
             {
-                DependencyService.Get<IToastMessage>().ShowToast("Unable to add contact, please try adding again.");
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.TryAddContact);
             }
         }
 

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EmergencyApp.HelpTextPage"
+             BackgroundColor="Black"
+             xmlns:resx="clr-namespace:EmergencyApp.Resx"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid Margin="10" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame BorderColor="AliceBlue" BackgroundColor="Transparent" HasShadow="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label TextColor="AliceBlue" Text="{x:Static resx:EmergencyAppResources.EditHere}" FontFamily="Courgette-Regular" FontSize="20"/>
+                    <Frame Grid.Row="1" BorderColor="AliceBlue" Padding="10" BackgroundColor="Transparent" VerticalOptions="Fill">
+                        <Editor TextColor="AliceBlue" Text="{Binding HelpText}"  FontFamily="Courgette-Regular" VerticalOptions="Fill" AutoSize="Disabled" />
+                    </Frame>
+                </Grid>
+            </Frame>
+            <Label TextColor="AliceBlue" Text="{x:Static resx:EmergencyAppResources.Preview}" FontFamily="Courgette-Regular" FontSize="20"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" Grid.Row="1" />
+            <Frame Grid.Row="2" BorderColor="AliceBlue" BackgroundColor="Transparent">
+                <Label TextColor="AliceBlue" FontFamily="Courgette-Regular" Text="{Binding HelpText, StringFormat='{0} &#10;&#10;https://maps.google.com/maps?q=@20.00,2.00'}"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" />
+            </Frame>
+            <Button Text="{x:Static resx:EmergencyAppResources.Done}" Padding="0" Grid.Row="3" CornerRadius="10" Command="{Binding HelpTextChanged}" FontFamily="Courgette-Regular">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="0,1">
+                        <GradientStop Color="LightGray"
+                          Offset="0.1"/>
+                        <GradientStop Color="LightSlateGray"
+                          Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

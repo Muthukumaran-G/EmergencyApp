@@ -1,3 +1,4 @@
+﻿using EmergencyApp.Resx;
 using SQLite;
 using System;
 using System.Globalization;
@@ -23,7 +24,6 @@ namespace EmergencyApp
             InitializeComponent();
 
             var viewModel = new ViewModel();
-
             if (string.IsNullOrEmpty(viewModel.UserName))
             {
                 viewModel.UserName = string.Empty;
@@ -36,6 +36,56 @@ namespace EmergencyApp
 
             CheckAndRequestLocationPermission();
         }
+
+        internal static void ChangeLanguage(string currentLanguage)
+        {
+            CultureInfo.CurrentCulture.ClearCachedData();
+            CultureInfo.CurrentUICulture.ClearCachedData();
+            CultureInfo language;
+            switch (currentLanguage)
+            {
+                default:
+                case "English":
+                    language = new CultureInfo("en");
+                    break;
+
+                case "தமிழ்":
+                    language = new CultureInfo("ta");
+                    break;
+
+                case "తెలుగు":
+                    language = new CultureInfo("te");
+                    break;
+
+                case "മലയാളം":
+                    language = new CultureInfo("ml");
+                    break;
+
+                case "हिंदी":
+                    language = new CultureInfo("hi");
+                    break;
+
+                case "Français":
+                    language = new CultureInfo("fr");
+                    break;
+
+                case "Italiano":
+                    language = new CultureInfo("it");
+                    break;
+
+                case "日本語":
+                    language = new CultureInfo("ja");
+                    break;
+
+                case "中国人":
+                    language = new CultureInfo("zh");
+                    break;
+            }
+
+            Thread.CurrentThread.CurrentUICulture = language;
+            EmergencyAppResources.Culture = language;
+        }
+
 
         public async void CheckAndRequestLocationPermission()
         {

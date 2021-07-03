@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace EmergencyApp
@@ -8,6 +9,8 @@ namespace EmergencyApp
     public class HomePageBehavior : Behavior<ContentPage>
 	{
         Frame Settings;
+        Frame Frame;
+        Grid ParentGrid;
         Blob HelpTextBlob;
         Blob ContactListBlob;
         Blob TranslateBlob;
@@ -21,6 +24,9 @@ namespace EmergencyApp
             HelpTextBlob = bindable.FindByName<Blob>("HelpTextBlob");
             ContactListBlob = bindable.FindByName<Blob>("ContactListBlob");
             TranslateBlob = bindable.FindByName<Blob>("TranslateBlob");
+            Frame = bindable.FindByName<Frame>("frame");
+            ParentGrid = bindable.FindByName<Grid>("parentGrid");
+            Frame.PropertyChanged += Frame_PropertyChanged;
             var gesture = new TapGestureRecognizer();
             gesture.Tapped += Gesture_Tapped;
             Settings.GestureRecognizers.Add(gesture);
@@ -37,29 +43,64 @@ namespace EmergencyApp
             ViewModel = (sender as ContentPage).BindingContext as ViewModel;
         }
 
+        private async void Frame_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Height" && Frame.IsVisible)
+            {
+                Frame.IsVisible = false;
+            }
+
+            if (e.PropertyName == "IsEnabled" && Frame.Height > 0)
+            {
+                if (Frame.IsEnabled)
+                {
+                    Frame.IsVisible = true;
+                    Frame.ScaleTo(1, 1000, Easing.BounceOut);
+                    await ParentGrid.FadeTo(0.2, 1000);
+                }
+                else
+                {
+                    Frame.ScaleTo(0, 1000, Easing.BounceIn);
+                    await ParentGrid.FadeTo(1, 1000);
+                    Frame.IsVisible = false;
+                }
+            }
+
+        }
+
+
         private async void CollapseSettings()
         {
-            HelpTextBlob.ScaleTo(0, 1000, Easing.Linear);
-            ContactListBlob.ScaleTo(0, 1000, Easing.Linear);
-            TranslateBlob.ScaleTo(0, 1000, Easing.Linear);
+            await Task.WhenAll(
+                HelpTextBlob.ScaleTo(0, 1500, Easing.BounceOut),
+            ContactListBlob.ScaleTo(0, 1500, Easing.BounceOut),
+            TranslateBlob.ScaleTo(0, 1500, Easing.BounceOut),
 
-            HelpTextBlob.FadeTo(0, 1000, Easing.Linear);
-            ContactListBlob.FadeTo(0, 1000, Easing.Linear);
-            TranslateBlob.FadeTo(0, 1000, Easing.Linear);
+            HelpTextBlob.FadeTo(0, 800, Easing.CubicIn),
+            ContactListBlob.FadeTo(0, 800, Easing.CubicIn),
+            TranslateBlob.FadeTo(0, 800, Easing.CubicIn),
 
-            HelpTextBlob.RotateTo(-360, 1500, Easing.BounceOut);
-            ContactListBlob.RotateTo(-360, 1500, Easing.BounceOut);
-            TranslateBlob.RotateTo(-360, 1500, Easing.BounceOut);
+            HelpTextBlob.RotateTo(-360, 1500, Easing.BounceOut),
+            ContactListBlob.RotateTo(-360, 1500, Easing.BounceOut),
+            TranslateBlob.RotateTo(-360, 1500, Easing.BounceOut),
 
-            HelpTextBlob.TranslateTo(0, 0, 1000, Easing.Linear);
-            ContactListBlob.TranslateTo(0, 0, 1000, Easing.Linear);
-            TranslateBlob.TranslateTo(0, 0, 1000, Easing.Linear);
+            HelpTextBlob.TranslateTo(-20, -20, 1000, Easing.Linear),
+            ContactListBlob.TranslateTo(-20, -20, 1000, Easing.Linear),
+            TranslateBlob.TranslateTo(-20, -20, 1000, Easing.Linear),
 
-            Settings.RotateTo(-360, 1000, Easing.Linear);
-            await System.Threading.Tasks.Task.Delay(1500);
-            HelpTextBlob.IsVisible = false;
-            ContactListBlob.IsVisible = false;
-            TranslateBlob.IsVisible = false;
+            Settings.RotateTo(-360, 1000, Easing.Linear)
+            
+                );
+
+            HelpTextBlob.TranslationX = 0;
+            HelpTextBlob.TranslationY = 0;
+            ContactListBlob.TranslationX = 0;
+            ContactListBlob.TranslationY = 0;
+            TranslateBlob.TranslationX = 0;
+            TranslateBlob.TranslationY = 0;
+                //HelpTextBlob.IsVisible = false;
+                //ContactListBlob.IsVisible = false;
+                //TranslateBlob.IsVisible = false;
             isOpen = false;
         }
 
@@ -86,9 +127,9 @@ namespace EmergencyApp
             //ContactListBlob.InputTransparent = true;
             //TranslateBlob.InputTransparent = true;
             //Settings.InputTransparent = true;
-            ViewModel.ContactTagVisible = false;
-            ViewModel.HelpTextTagVisible = false;
-            ViewModel.TranslateTagVisible = false;
+            //ViewModel.ContactTagVisible = false;
+            //ViewModel.HelpTextTagVisible = false;
+            //ViewModel.TranslateTagVisible = false;
             isAnimating = true;
 
             if (isOpen)
@@ -97,27 +138,37 @@ namespace EmergencyApp
             }
             else
             {
-                HelpTextBlob.IsVisible = true;
-                ContactListBlob.IsVisible = true;
-                TranslateBlob.IsVisible = true;
-                HelpTextBlob.ScaleTo(1, 1000, Easing.Linear);
-                ContactListBlob.ScaleTo(1, 1000, Easing.Linear);
-                TranslateBlob.ScaleTo(1, 1000, Easing.Linear);
+                //HelpTextBlob.IsVisible = true;
+                //ContactListBlob.IsVisible = true;
+                //TranslateBlob.IsVisible = true;
+                HelpTextBlob.TranslationX = -20;
+                HelpTextBlob.TranslationY = -20;
+                ContactListBlob.TranslationX = -20;
+                ContactListBlob.TranslationY = -20;
+                TranslateBlob.TranslationX = -20;
+                TranslateBlob.TranslationY = -20;
 
-                HelpTextBlob.FadeTo(1, 100, Easing.Linear);
-                ContactListBlob.FadeTo(1, 100, Easing.Linear);
-                TranslateBlob.FadeTo(1, 100, Easing.Linear);
+                await Task.WhenAll(
+                HelpTextBlob.ScaleTo(1, 1500, Easing.BounceOut),
+                ContactListBlob.ScaleTo(1, 1500, Easing.BounceOut),
+                TranslateBlob.ScaleTo(1, 1500, Easing.BounceOut),
 
-                HelpTextBlob.RotateTo(360, 1500, Easing.BounceOut);
-                ContactListBlob.RotateTo(360, 1500, Easing.BounceOut);
-                TranslateBlob.RotateTo(360, 1500, Easing.BounceOut);
+                HelpTextBlob.FadeTo(1, 200, Easing.CubicIn),
+                ContactListBlob.FadeTo(1, 200, Easing.CubicIn),
+                TranslateBlob.FadeTo(1, 200, Easing.CubicIn),
 
-                HelpTextBlob.TranslateTo(-50, -50, 1000, Easing.Linear);
-                ContactListBlob.TranslateTo(-100, 0, 1000, Easing.Linear);
-                TranslateBlob.TranslateTo(0, -100, 1000, Easing.Linear);
+                HelpTextBlob.RotateTo(360, 1500, Easing.BounceOut),
+                ContactListBlob.RotateTo(360, 1500, Easing.BounceOut),
+                TranslateBlob.RotateTo(360, 1500, Easing.BounceOut),
 
-                Settings.RotateTo(360, 1000, Easing.Linear);
-                await System.Threading.Tasks.Task.Delay(1500);
+                HelpTextBlob.TranslateTo(-70, -75, 1000, Easing.Linear),
+                ContactListBlob.TranslateTo(-120, -20, 1000, Easing.Linear),
+                TranslateBlob.TranslateTo(-20, -120, 1000, Easing.Linear),
+
+                Settings.RotateTo(360, 1000, Easing.Linear)
+                );
+
+                //await System.Threading.Tasks.Task.Delay(1500);
                 isOpen = true;
             }
 
