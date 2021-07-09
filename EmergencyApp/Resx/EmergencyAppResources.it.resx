@@ -139,7 +139,7 @@
     <value>Accesso al contatto negato</value>
   </data>
   <data name="ContactList" xml:space="preserve">
-    <value>Lista dei contatti</value>
+    <value>Elenco dei destinatari</value>
   </data>
   <data name="DeleteContact" xml:space="preserve">
     <value>Elimina</value>
@@ -225,6 +225,9 @@
   <data name="NoRecipients" xml:space="preserve">
     <value>Nessun destinatario.</value>
   </data>
+  <data name="NoService" xml:space="preserve">
+    <value>Nessun servizio</value>
+  </data>
   <data name="NumberWithPin" xml:space="preserve">
     <value>Numero con pin</value>
   </data>
@@ -251,6 +254,15 @@
   </data>
   <data name="Retry" xml:space="preserve">
     <value>Riprova</value>
+  </data>
+  <data name="SmsDelivered" xml:space="preserve">
+    <value>SMS consegnati</value>
+  </data>
+  <data name="SmsNotDelivered" xml:space="preserve">
+    <value>SMS non consegnato</value>
+  </data>
+  <data name="SmsSent" xml:space="preserve">
+    <value>L'SMS è stato inviato</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Successo</value>

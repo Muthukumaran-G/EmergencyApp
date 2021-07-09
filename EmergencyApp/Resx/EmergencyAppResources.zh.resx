@@ -139,7 +139,7 @@
     <value>联系人访问被拒绝</value>
   </data>
   <data name="ContactList" xml:space="preserve">
-    <value>联系人列表</value>
+    <value>收件人列表</value>
   </data>
   <data name="DeleteContact" xml:space="preserve">
     <value>删除</value>
@@ -225,6 +225,9 @@
   <data name="NoRecipients" xml:space="preserve">
     <value>没有收件人。</value>
   </data>
+  <data name="NoService" xml:space="preserve">
+    <value>没有信号</value>
+  </data>
   <data name="NumberWithPin" xml:space="preserve">
     <value>带针的数字</value>
   </data>
@@ -251,6 +254,15 @@
   </data>
   <data name="Retry" xml:space="preserve">
     <value>重试</value>
+  </data>
+  <data name="SmsDelivered" xml:space="preserve">
+    <value>短信已送达</value>
+  </data>
+  <data name="SmsNotDelivered" xml:space="preserve">
+    <value>短信未送达</value>
+  </data>
+  <data name="SmsSent" xml:space="preserve">
+    <value>短信已发送</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>成功</value>

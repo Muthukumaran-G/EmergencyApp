@@ -10,7 +10,7 @@
             <Frame BackgroundColor="White" BorderColor="PeachPuff" CornerRadius="7" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Scale="11" Rotation="45" TranslationX="-120"/>
             <Image Margin="30" Source="siren.png" HeightRequest="120" WidthRequest="120" HorizontalOptions="Start" VerticalOptions="Center"/>
             <Label Margin="40" FontFamily="Courgette-Regular" HorizontalTextAlignment="Start" VerticalTextAlignment="End" TextColor="Black" Text="{x:Static resx:EmergencyAppResources.NewUser}" FontSize="Large" FontAttributes="Bold"/>
-            <Entry FontFamily="Courgette-Regular" HorizontalOptions="Start" WidthRequest="250" VerticalOptions="Center" Margin="40,60,0,0" Grid.RowSpan="2" Placeholder="Enter user name" Text="{Binding UserName}"/>
+            <Entry FontFamily="Courgette-Regular" HorizontalOptions="Start" WidthRequest="250" VerticalOptions="Center" Margin="40,60,0,0" Grid.RowSpan="2" Placeholder="Enter user name" Text="{Binding UserDetails.UserName}"/>
             <Frame x:Name="frameGrid" Grid.Row="1" BackgroundColor="Transparent" Margin="20" TranslationY="-20" CornerRadius="50" Padding="0" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="150" >
                 <Grid>
                     <Grid IsVisible="{Binding IsLoginVisible}">

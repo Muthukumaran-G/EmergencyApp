@@ -139,7 +139,7 @@
     <value>連絡先へのアクセスが拒否されました</value>
   </data>
   <data name="ContactList" xml:space="preserve">
-    <value>連絡先リスト</value>
+    <value>受信者リスト</value>
   </data>
   <data name="DeleteContact" xml:space="preserve">
     <value>削除</value>
@@ -225,6 +225,9 @@
   <data name="NoRecipients" xml:space="preserve">
     <value>受信者はいません。</value>
   </data>
+  <data name="NoService" xml:space="preserve">
+    <value>サービス無し</value>
+  </data>
   <data name="NumberWithPin" xml:space="preserve">
     <value>ピン付きの番号</value>
   </data>
@@ -251,6 +254,15 @@
   </data>
   <data name="Retry" xml:space="preserve">
     <value>リトライ</value>
+  </data>
+  <data name="SmsDelivered" xml:space="preserve">
+    <value>SMS配信</value>
+  </data>
+  <data name="SmsNotDelivered" xml:space="preserve">
+    <value>SMSが配信されない</value>
+  </data>
+  <data name="SmsSent" xml:space="preserve">
+    <value>SMSが送信されました</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>成功</value>

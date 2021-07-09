@@ -95,19 +95,6 @@ namespace EmergencyApp
             }
         }
 
-        private string listTitle;
-        public string ListTitle
-        {
-            get
-            {
-                return listTitle;
-            }
-            set
-            {
-                listTitle = value;
-                RaisePropertyChanged();
-            }
-        }
         private bool showPopup;
         public bool ShowPopup
         {
@@ -232,19 +219,17 @@ namespace EmergencyApp
                         OrderList.Add(new RecipientModel()
                         {
                             RecipientNumber = recipientsTable.ToList().ToArray()[i].RecipientNumber,
-                            RecipientName = recipientsTable.ToList().ToArray()[i].RecipientName
+                            RecipientName = recipientsTable.ToList().ToArray()[i].RecipientName,
+                            Serial = recipientsTable.ToList().ToArray()[i].Serial
                         });
                         contactNames[i] = recipientsTable.ToList().ToArray()[i].RecipientNumber;
                     }
-                    ListTitle = "Added Contacts";
                 }
-                else
-                    ListTitle = "No contact added..!";
 
-                var userTable = (from i in database.Table<User>() select i);
+                //var userTable = (from i in database.Table<User>() select i);
 
-                if (userTable.Count() > 0)
-                    this.UserName = (userTable.ToList().ToArray()[0].UserName);
+                //if (userTable.Count() > 0)
+                //    this.UserDetails.UserName = (userTable.ToList().ToArray()[0].UserName);
             }
         }
 
@@ -264,8 +249,6 @@ namespace EmergencyApp
                         contactNames[i] = table.ToList().ToArray()[i].RecipientNumber;
                     }
                 }
-                else
-                    ListTitle = "No contact added..!";
 
                 DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.DeleteContact);
             }
@@ -314,13 +297,13 @@ namespace EmergencyApp
                     EditContactDetails.RecipientNumber = this.RecipientNumber;
                     database.Update(EditContactDetails);
                     DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.RecipientUpdated);
-
                 }
                 else
                 {
                     var newContact = new RecipientModel() { RecipientName = this.RecipientName, RecipientNumber = this.RecipientNumber };
-                    database.Insert(newContact);
                     OrderList.Add(newContact);
+                    newContact.Serial = Guid.NewGuid().ToString();
+                    database.Insert(newContact);
                     contactNames = new string[OrderList.Count()];
 
                     for (int i = 0; i < OrderList.Count(); i++)
@@ -335,7 +318,6 @@ namespace EmergencyApp
                 this.RecipientNumber = string.Empty;
                 IsContactAdded = false;
                 ShowPopup = false;
-                ListTitle = "Added Contacts";
             }
             catch (Exception ex)
             {
@@ -363,8 +345,10 @@ namespace EmergencyApp
                     return;
 
                 var newContact = new RecipientModel() { RecipientName = contact.DisplayName, RecipientNumber = contact.Phones[0].PhoneNumber };
-                database.Insert(newContact);
                 OrderList.Add(newContact);
+                newContact.Serial = Guid.NewGuid().ToString();
+                database.Insert(newContact);
+
                 contactNames = new string[OrderList.Count()];
 
                 for (int i = 0; i < OrderList.Count(); i++)
@@ -373,8 +357,6 @@ namespace EmergencyApp
                 }
 
                 DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.PhoneContactAdded);
-
-                ListTitle = "Added Contacts";
             }
             catch (Exception ex)
             {
@@ -385,6 +367,7 @@ namespace EmergencyApp
         private void AddNewContactCommand(object obj)
         {
             ShowPopup = true;
+            IsEditPopup = false;
             PopupTitle = "Add new contact";
         }
     }

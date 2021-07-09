@@ -61,7 +61,7 @@ namespace EmergencyApp.Droid
                 throw new Exception("No GPS provider could be found for given criteria!");
             }
 
-            _locMgr.RequestLocationUpdates(provider, 120000, 50, Listener);
+            _locMgr.RequestLocationUpdates(provider, 120000, 500, Listener);
         }
         public void StopRequests()
         {

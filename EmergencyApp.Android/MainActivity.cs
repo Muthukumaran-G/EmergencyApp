@@ -15,18 +15,16 @@ using Android.Support.V4.App;
 using Android;
 using AndroidX.Core.App;
 using Android.Locations;
+using System.Collections.Generic;
+using System.Linq;
 
 [assembly: Dependency(typeof(SendMessage))]
 namespace EmergencyApp.Droid
 {
     [Activity(Label = "EmergencyApp", Icon = "@mipmap/siren", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity//, ILocationListener
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static Activity Activity;
-        private LocationManager _locMgr;
-        GPSLocationService locationService;
-        private string _provider = LocationManager.GpsProvider;
-        private object _locationProvider;
         private SMSSentReceiver _smsSentBroadcastReceiver;
         private SMSDeliveredReceiver _smsDeliveredBroadcastReceiver;
 
@@ -71,24 +69,7 @@ namespace EmergencyApp.Droid
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            switch ((int)ResultCode)
-            {
-                case (int)Result.Ok:
-                    Toast.MakeText(context, "SMS has been sent", ToastLength.Short).Show();
-                    break;
-                case (int)SmsResultError.GenericFailure:
-                    Toast.MakeText(context, "Generic Failure", ToastLength.Short).Show();
-                    break;
-                case (int)SmsResultError.NoService:
-                    Toast.MakeText(context, "No Service", ToastLength.Short).Show();
-                    break;
-                case (int)SmsResultError.NullPdu:
-                    Toast.MakeText(context, "Null PDU", ToastLength.Short).Show();
-                    break;
-                case (int)SmsResultError.RadioOff:
-                    Toast.MakeText(context, "Radio Off", ToastLength.Short).Show();
-                    break;
-            }
+            MessagingCenter.Send<object, int>(context, "SentReceiver", (int)ResultCode);
         }
     }
 
@@ -97,15 +78,7 @@ namespace EmergencyApp.Droid
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            switch ((int)ResultCode)
-            {
-                case (int)Result.Ok:
-                    Toast.MakeText(context, "SMS Delivered", ToastLength.Short).Show();
-                    break;
-                case (int)Result.Canceled:
-                    Toast.MakeText(context, "SMS not delivered", ToastLength.Short).Show();
-                    break;
-            }
+            MessagingCenter.Send<object, int>(context, "DeliveredReceiver", (int)ResultCode);
         }
     }
 
@@ -118,7 +91,17 @@ namespace EmergencyApp.Droid
             {
                 var piSent = PendingIntent.GetBroadcast(MainActivity.Activity.ApplicationContext, 0, new Intent("SMS_SENT"), 0);
                 var piDelivered = PendingIntent.GetBroadcast(MainActivity.Activity.ApplicationContext, 0, new Intent("SMS_DELIVERED"), 0);
-                sms.SendTextMessage(contact, null, message, piSent, piDelivered);
+                List<string> messageParts = sms.DivideMessage(message).ToList();
+                List<PendingIntent> sentPendingIntents = new List<PendingIntent>();
+                List<PendingIntent> deliveredPendingIntents = new List<PendingIntent>();
+                for (int i = 0; i < messageParts.Count; i++)
+                {
+                    sentPendingIntents.Add(piSent);
+
+                    deliveredPendingIntents.Add(piDelivered);
+                }
+                sms.SendMultipartTextMessage(contact, null, messageParts, sentPendingIntents, deliveredPendingIntents);
+                //sms.SendTextMessage(contact, null, message, piSent, piDelivered);
             }
         }
     }

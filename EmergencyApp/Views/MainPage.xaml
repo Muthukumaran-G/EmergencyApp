@@ -46,7 +46,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ScrollView Orientation="Horizontal">
-                <Label Margin="20" Text="{Binding UserName, StringFormat='Hello {0}'}" FontFamily="Courgette" TextColor="White" FontSize="20"/>
+                <StackLayout Orientation="Horizontal" Margin="20">
+                    <Label Text="{x:Static resx:EmergencyAppResources.Hello}" FontFamily="Courgette" TextColor="White" FontSize="20"/>
+                    <Label Text="{Binding UserDetails.UserName}" FontFamily="Courgette" TextColor="White" FontSize="20"/>
+                </StackLayout>
             </ScrollView>
             <Ellipse />
             <Frame Grid.ColumnSpan="2" x:Name="Settings" Padding="0" CornerRadius="20"

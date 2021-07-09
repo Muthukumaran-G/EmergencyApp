@@ -179,43 +179,58 @@ namespace EmergencyApp
             }
         }
 
-        public string UserName
-        {
-            get
-            {
-                return userName;
-            }
-            set
-            {
-                userName = value;
-                RaisePropertyChanged("UserName");
-            }
-        }
+        //public string UserName
+        //{
+        //    get
+        //    {
+        //        return userName;
+        //    }
+        //    set
+        //    {
+        //        userName = value;
+        //        RaisePropertyChanged("UserName");
+        //    }
+        //}
 
-        public string helpText;
-        public string HelpText
-        {
-            get
-            {
-                return helpText;
-            }
-            set
-            {
-                helpText = value;
-                RaisePropertyChanged();
-            }
-        }
+        //public string helpText;
+        //public string HelpText
+        //{
+        //    get
+        //    {
+        //        return helpText;
+        //    }
+        //    set
+        //    {
+        //        helpText = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
-        public string language;
-        public string Language
+        //public string language;
+        //public string Language
+        //{
+        //    get
+        //    {
+        //        return language;
+        //    }
+        //    set
+        //    {
+        //        language = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
+
+        private User userDetails;
+
+        public User UserDetails
         {
             get
             {
-                return language;
+                return userDetails;
             }
             set
             {
-                language = value;
+                userDetails = value;
                 RaisePropertyChanged();
             }
         }
@@ -269,15 +284,19 @@ namespace EmergencyApp
 
                 if (userTable.Count() > 0)
                 {
-                    this.UserName = userTable.ToList().ToArray()[0].UserName;
-                    this.HelpText = userTable.ToList().ToArray()[0].HelpText;
-                    var language = userTable.ToList().ToArray()[0].Language;
-                    this.Language = language;
-                    App.ChangeLanguage(language);
-                    if (language != null)
-                        LanguageList.FirstOrDefault(x => x.Language.Equals(language)).IsSelected = true;
+                    this.UserDetails = userTable.ToList().ToArray()[0];
+                    App.ChangeLanguage(this.UserDetails.Language);
+                    if (this.UserDetails.Language != null)
+                        LanguageList.FirstOrDefault(x => x.Language.Equals(this.UserDetails.Language)).IsSelected = true;
                     else
+                    {
                         LanguageList.FirstOrDefault(x => x.Language.Equals("English")).IsSelected = true;
+                        userTable.ToList().ToArray()[0].Language = "English";
+                    }
+                }
+                else
+                {
+                    this.UserDetails = new User();
                 }
             }
             
@@ -288,7 +307,7 @@ namespace EmergencyApp
 
         private void HelpTextChangedCommand(object obj)
         {
-            database.Update(new User() { HelpText = this.HelpText, UserName = this.UserName, Language = this.Language });
+            database.Update(this.UserDetails);
             App.Current.MainPage.Navigation.PopModalAsync();
         }
 
@@ -337,9 +356,9 @@ namespace EmergencyApp
                 previousLanguage.IsSelected = false;
 
             user.IsSelected = true;
-            this.Language = language;
+            this.UserDetails.Language = user.Language;
             App.ChangeLanguage(user.Language);
-            database.Update(new User() { UserName = this.UserName, HelpText = this.HelpText, Language = user.Language });
+            database.Update(this.UserDetails);
 
             App.Current.MainPage = new NavigationPage(new MainPage(this) { BindingContext = this });
             FrameVisibility = false;
@@ -382,7 +401,7 @@ namespace EmergencyApp
 
         private async void LogInCommand(object obj)
         {
-            if (string.IsNullOrEmpty(UserName))
+            if (string.IsNullOrEmpty(this.UserDetails.UserName))
             {
                 DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.MissingUserName);
             }
@@ -392,7 +411,10 @@ namespace EmergencyApp
                 await Task.Delay(2000);
                 //if (CurrentLocation == null)
                 //    await GetLocation();
-                database.Insert(new User() { UserName = this.UserName, HelpText = $"This is {UserName}. I need your help. I am currently here ", Language = this.Language });
+                this.UserDetails.HelpText = $"This is {this.UserDetails.UserName}. I need your help. I am currently here ";
+                this.UserDetails.Language = "English";
+                database.Insert(this.UserDetails);
+                LanguageList.FirstOrDefault(x => x.Language.Equals("English")).IsSelected = true;
                 App.Current.MainPage = new NavigationPage(new MainPage(this) { BindingContext = this });
             }
 
@@ -423,7 +445,7 @@ namespace EmergencyApp
                 CurrentLocation.Altitude = e.Altitude;
                 CurrentLocation.Latitude = e.Latitude;
                 CurrentLocation.Longitude = e.Longitude;
-                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.LocationUpdated);
+                //DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.LocationUpdated);
             }
         }
 
@@ -447,7 +469,7 @@ namespace EmergencyApp
 
         private void AddContactPageCommand(object obj)
         {
-            App.Current.MainPage.Navigation.PushAsync(new AddRecipients());
+            App.Current.MainPage.Navigation.PushModalAsync(new AddRecipients());
         }
 
         private async void SosCommand(object obj)
@@ -478,7 +500,7 @@ namespace EmergencyApp
                 uri = $"https://" + $"maps.google.com/maps?q=@{CurrentLocation.Latitude},{CurrentLocation.Longitude}";
 
                 System.Diagnostics.Debug.WriteLine(uri);
-                await SMS.SendSms(HelpText + System.Environment.NewLine + " " + uri, contactNames);
+                await SMS.SendSms(this.UserDetails.HelpText + System.Environment.NewLine + " " + uri, contactNames);
             }
             else
             {

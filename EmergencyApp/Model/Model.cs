@@ -11,8 +11,23 @@ namespace EmergencyApp
         public string recipientNumber;
         public string recipientName;
         public string userName;
+        public string serial;
+
 
         [PrimaryKey]
+        public string Serial
+        {
+            get
+            {
+                return serial;
+            }
+            set
+            {
+                serial = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string RecipientNumber
         {
             get

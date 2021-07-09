@@ -106,7 +106,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Label BackgroundColor="DodgerBlue" Text="{Binding PopupTitle}" CharacterSpacing="3" VerticalTextAlignment="Center" TextColor="White" Padding="15" FontFamily="Courgette-Regular" TextTransform="Uppercase"/>
+                    <!--<Label BackgroundColor="DodgerBlue" Text="{Binding PopupTitle}" CharacterSpacing="3" VerticalTextAlignment="Center" TextColor="White" Padding="15" FontFamily="Courgette-Regular" TextTransform="Uppercase"/>-->
                     <ImageButton Source="Close" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" Padding="5" Margin="0,0,15,0" BackgroundColor="Red" CornerRadius="15" Command="{Binding BackgroundGesture}"/>
                     <Grid Grid.Row="1" Margin="15,2,15,2">
                         <Frame BackgroundColor="AliceBlue" CornerRadius="5"/>

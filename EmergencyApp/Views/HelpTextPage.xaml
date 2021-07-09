@@ -21,7 +21,7 @@
                     </Grid.RowDefinitions>
                     <Label TextColor="AliceBlue" Text="{x:Static resx:EmergencyAppResources.EditHere}" FontFamily="Courgette-Regular" FontSize="20"/>
                     <Frame Grid.Row="1" BorderColor="AliceBlue" Padding="10" BackgroundColor="Transparent" VerticalOptions="Fill">
-                        <Editor TextColor="AliceBlue" Text="{Binding HelpText}"  FontFamily="Courgette-Regular" VerticalOptions="Fill" AutoSize="Disabled" />
+                        <Editor TextColor="AliceBlue" Text="{Binding UserDetails.HelpText}"  FontFamily="Courgette-Regular" VerticalOptions="Fill" AutoSize="Disabled" />
                     </Frame>
                 </Grid>
             </Frame>
@@ -29,7 +29,7 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" Grid.Row="1" />
             <Frame Grid.Row="2" BorderColor="AliceBlue" BackgroundColor="Transparent">
-                <Label TextColor="AliceBlue" FontFamily="Courgette-Regular" Text="{Binding HelpText, StringFormat='{0} &#10;&#10;https://maps.google.com/maps?q=@20.00,2.00'}"
+                <Label TextColor="AliceBlue" FontFamily="Courgette-Regular" Text="{Binding UserDetails.HelpText, StringFormat='{0} &#10;&#10;https://maps.google.com/maps?q=@20.00,2.00'}"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand" />
             </Frame>

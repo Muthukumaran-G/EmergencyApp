@@ -139,7 +139,7 @@
     <value>தொடர்பு அணுகல் மறுக்கப்பட்டது</value>
   </data>
   <data name="ContactList" xml:space="preserve">
-    <value>தொடர்பு பட்டியல்</value>
+    <value>பெறுநர்களின் பட்டியல்</value>
   </data>
   <data name="DeleteContact" xml:space="preserve">
     <value>நீக்கு</value>
@@ -225,6 +225,9 @@
   <data name="NoRecipients" xml:space="preserve">
     <value>பெறுநர்கள் இல்லை.</value>
   </data>
+  <data name="NoService" xml:space="preserve">
+    <value>சேவை இல்லை</value>
+  </data>
   <data name="NumberWithPin" xml:space="preserve">
     <value>அரிகோடோடு எண்</value>
   </data>
@@ -251,6 +254,15 @@
   </data>
   <data name="Retry" xml:space="preserve">
     <value>மீண்டும் முயற்சிக்கவும்</value>
+  </data>
+  <data name="SmsDelivered" xml:space="preserve">
+    <value>குறுஞ்செய்தி வழங்கப்பட்டது</value>
+  </data>
+  <data name="SmsNotDelivered" xml:space="preserve">
+    <value>குறுஞ்செய்தி வழங்கப்படவில்லை</value>
+  </data>
+  <data name="SmsSent" xml:space="preserve">
+    <value>குறுஞ்செய்தி அனுப்பப்பட்டுள்ளது</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>வெற்றி</value>

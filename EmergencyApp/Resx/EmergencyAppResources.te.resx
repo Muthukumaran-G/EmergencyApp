@@ -139,7 +139,7 @@
     <value>సంప్రదింపు ప్రాప్యత తిరస్కరించబడింది</value>
   </data>
   <data name="ContactList" xml:space="preserve">
-    <value>సంప్రదింపు జాబితా</value>
+    <value>గ్రహీతల జాబితా</value>
   </data>
   <data name="DeleteContact" xml:space="preserve">
     <value>తొలగించు</value>
@@ -225,6 +225,9 @@
   <data name="NoRecipients" xml:space="preserve">
     <value>గ్రహీతలు లేరు.</value>
   </data>
+  <data name="NoService" xml:space="preserve">
+    <value>సేవ లేదు</value>
+  </data>
   <data name="NumberWithPin" xml:space="preserve">
     <value>పిన్‌తో సంఖ్య</value>
   </data>
@@ -251,6 +254,15 @@
   </data>
   <data name="Retry" xml:space="preserve">
     <value>మళ్లీ ప్రయత్నించండి</value>
+  </data>
+  <data name="SmsDelivered" xml:space="preserve">
+    <value>SMS పంపిణీ చేయబడింది</value>
+  </data>
+  <data name="SmsNotDelivered" xml:space="preserve">
+    <value>SMS పంపిణీ చేయబడలేదు</value>
+  </data>
+  <data name="SmsSent" xml:space="preserve">
+    <value>SMS పంపబడింది</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>విజయం</value>

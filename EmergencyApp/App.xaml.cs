@@ -22,11 +22,64 @@ namespace EmergencyApp
         public App()
         {
             InitializeComponent();
+            MessagingCenter.Subscribe<object, int>(this, "SentReceiver", (sender, arg) =>
+            {
+                switch (arg)
+                {
+                    case -1:
+                        DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.SmsSent);
+                        break;
+                    case 1:
+                        DependencyService.Get<IToastMessage>().ShowToast("Generic failure");
+
+                        break;
+                    case 2:
+                        DependencyService.Get<IToastMessage>().ShowToast("Radio off");
+
+                        break;
+                    case 3:
+                        DependencyService.Get<IToastMessage>().ShowToast("NullPdu");
+                        
+                        break;
+                    case 5:
+                        DependencyService.Get<IToastMessage>().ShowToast("Limit exceeded");
+
+                        break;
+                    case 7:
+                        DependencyService.Get<IToastMessage>().ShowToast("Short code not allowed");
+
+                        break;
+                    case 8:
+                        DependencyService.Get<IToastMessage>().ShowToast("Short Code Never Allowed");
+
+                        break;
+
+                    default:
+                    case 4:
+                        DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.NoService);
+                        break;
+                }
+            });
+
+            MessagingCenter.Subscribe<object, int>(this, "DeliveredReceiver", (sender, arg) =>
+            {
+                switch (arg)
+                {
+                    case -1:
+                        DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.SmsDelivered);
+                        break;
+
+                    default:
+                    case 0:
+                        DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.SmsNotDelivered);
+                        break;
+                }
+            });
 
             var viewModel = new ViewModel();
-            if (string.IsNullOrEmpty(viewModel.UserName))
+            if (string.IsNullOrEmpty(viewModel.UserDetails.UserName))
             {
-                viewModel.UserName = string.Empty;
+                viewModel.UserDetails.UserName = string.Empty;
                 MainPage = new NavigationPage(new LoginPage() { BindingContext = viewModel });
             }
             else

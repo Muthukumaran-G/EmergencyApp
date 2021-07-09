@@ -139,7 +139,7 @@
     <value>കോൺ‌ടാക്റ്റ് ആക്‌സസ് നിരസിച്ചു</value>
   </data>
   <data name="ContactList" xml:space="preserve">
-    <value>കോൺ‌ടാക്റ്റ് പട്ടിക</value>
+    <value>സ്വീകർത്താവിന്റെ പട്ടിക</value>
   </data>
   <data name="DeleteContact" xml:space="preserve">
     <value>ഇല്ലാതാക്കുക</value>
@@ -225,6 +225,9 @@
   <data name="NoRecipients" xml:space="preserve">
     <value>സ്വീകർത്താക്കൾ ഇല്ല.</value>
   </data>
+  <data name="NoService" xml:space="preserve">
+    <value>സേവനമില്ല</value>
+  </data>
   <data name="NumberWithPin" xml:space="preserve">
     <value>പിൻ ഉള്ള നമ്പർ</value>
   </data>
@@ -251,6 +254,15 @@
   </data>
   <data name="Retry" xml:space="preserve">
     <value>വീണ്ടും ശ്രമിക്കുക</value>
+  </data>
+  <data name="SmsDelivered" xml:space="preserve">
+    <value>SMS കൈമാറി</value>
+  </data>
+  <data name="SmsNotDelivered" xml:space="preserve">
+    <value>SMS കൈമാറിയില്ല</value>
+  </data>
+  <data name="SmsSent" xml:space="preserve">
+    <value>SMS അയച്ചു</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>വിജയം</value>
