@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>గురించి</value>
   </data>
+  <data name="AddRecipient" xml:space="preserve">
+    <value>కొత్త గ్రహీతని జోడించండి</value>
+  </data>
   <data name="AlertMessage" xml:space="preserve">
     <value>మీరు ఖచ్చితంగా భాషా సెట్టింగులను మార్చాలనుకుంటున్నారా?</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="EditHere" xml:space="preserve">
     <value>ఇక్కడ సవరించండి</value>
+  </data>
+  <data name="EditRecipient" xml:space="preserve">
+    <value>స్వీకర్తను సవరించండి</value>
   </data>
   <data name="EnableGPS" xml:space="preserve">
     <value>GPS ని ప్రారంభించండి</value>

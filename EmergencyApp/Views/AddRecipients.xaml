@@ -24,7 +24,7 @@
                 <TapGestureRecognizer Command="{Binding BackgroundGesture}"/>
             </Grid.GestureRecognizers>-->
 
-            <StackLayout x:Name="mainStack">
+            <StackLayout x:Name="mainStack" InputTransparent="{Binding ShowPopup}">
                 <!--<StackLayout Orientation="Horizontal">
                     <Label Text="Enter number with area code :" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
                     <Entry Completed="Entry_Completed" Keyboard="Telephone" x:Name="entry" HorizontalOptions="FillAndExpand"/>
@@ -62,6 +62,9 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <SwipeView>
+                                <SwipeView.Behaviors>
+                                    <emergencyapp:SwipeViewBehavior/>
+                                </SwipeView.Behaviors>
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type emergencyapp:RecipientsViewModel}}, Path=EditInvoked}" CommandParameter="{Binding}">
@@ -106,17 +109,17 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <!--<Label BackgroundColor="DodgerBlue" Text="{Binding PopupTitle}" CharacterSpacing="3" VerticalTextAlignment="Center" TextColor="White" Padding="15" FontFamily="Courgette-Regular" TextTransform="Uppercase"/>-->
+                    <Label BackgroundColor="DodgerBlue" Text="{Binding PopupTitle}" CharacterSpacing="3" VerticalTextAlignment="Center" TextColor="White" Padding="15" FontFamily="Courgette-Regular" TextTransform="Uppercase"/>
                     <ImageButton Source="Close" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" Padding="5" Margin="0,0,15,0" BackgroundColor="Red" CornerRadius="15" Command="{Binding BackgroundGesture}"/>
                     <Grid Grid.Row="1" Margin="15,2,15,2">
                         <Frame BackgroundColor="AliceBlue" CornerRadius="5"/>
-                        <Label x:Name="nameLabel" WidthRequest="70" Text="{x:Static resx:EmergencyAppResources.Name}" CharacterSpacing="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6" FontFamily="Courgette-Regular"/>
+                        <Label x:Name="nameLabel" Margin="3,0,0,0" WidthRequest="70" Text="{x:Static resx:EmergencyAppResources.Name}" CharacterSpacing="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6" FontFamily="Courgette-Regular"/>
                         <Entry x:Name="nameEntry" Text="{Binding RecipientName}" VerticalTextAlignment="End" FontSize="13" FontFamily="Courgette-Regular" ClearButtonVisibility="WhileEditing" CharacterSpacing="3"/>
                         <Label IsVisible="{Binding IsNameEmpty}" FontSize="9" Margin="5,0,0,0" HorizontalOptions="Start" VerticalOptions="End" TranslationY="3" WidthRequest="120" Text="{x:Static resx:EmergencyAppResources.MissingName}" TextColor="Red"/>
                     </Grid>
                     <Grid Grid.Row="2" Margin="15,2,15,2">
                         <Frame BackgroundColor="AliceBlue" CornerRadius="5"/>
-                        <Label x:Name="numberLabel" WidthRequest="70" Text="{x:Static resx:EmergencyAppResources.NumberWithPin}" CharacterSpacing="1" FontFamily="Courgette-Regular" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6"/>
+                        <Label x:Name="numberLabel" Margin="3,0,0,0" WidthRequest="70" Text="{x:Static resx:EmergencyAppResources.NumberWithPin}" CharacterSpacing="1" FontFamily="Courgette-Regular" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Opacity="0.6"/>
                         <Entry x:Name="numberEntry" Text="{Binding RecipientNumber}" VerticalTextAlignment="End" FontSize="13"  Keyboard="Telephone" ClearButtonVisibility="WhileEditing" FontFamily="Courgette-Regular" CharacterSpacing="2"/>
                         <Label IsVisible="{Binding IsNumberEmpty}" FontSize="9" HorizontalOptions="Start" VerticalOptions="End" Margin="5,0,0,0" TranslationY="3" WidthRequest="120" Text="{x:Static resx:EmergencyAppResources.MissingNumber}" TextColor="Red"/>
                     </Grid>

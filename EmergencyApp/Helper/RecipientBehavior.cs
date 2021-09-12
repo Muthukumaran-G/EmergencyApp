@@ -32,22 +32,32 @@ namespace EmergencyApp
 
         private void NumberEntry_Unfocused(object sender, FocusEventArgs e)
         {
-            NumberLabel.TranslateTo(0, 0, 500, Easing.Linear);
+            if(string.IsNullOrEmpty(NumberEntry.Text))
+            {
+                NumberLabel.TranslateTo(0, 0, 300, Easing.Linear);
+                NumberLabel.ScaleTo(1, 300, Easing.Linear);
+            }
         }
 
         private void NumberEntry_Focused(object sender, FocusEventArgs e)
         {
-            NumberLabel.TranslateTo(20, -20, 300, Easing.Linear);
+            NumberLabel.TranslateTo(-20, -20, 300, Easing.Linear);
+            NumberLabel.ScaleTo(0.8, 300, Easing.Linear);
         }
 
         private void NameEntry_Unfocused(object sender, FocusEventArgs e)
         {
-            NameLabel.TranslateTo(0, 0, 500, Easing.Linear);
+            if (string.IsNullOrEmpty(NameEntry.Text))
+            {
+                NameLabel.TranslateTo(0, 0, 300, Easing.Linear);
+                NameLabel.ScaleTo(1, 300, Easing.Linear);
+            }
         }
 
         private void NameEntry_Focused(object sender, FocusEventArgs e)
         {
-            NameLabel.TranslateTo(20, -20, 300, Easing.Linear);
+            NameLabel.TranslateTo(-20, -20, 300, Easing.Linear);
+            NameLabel.ScaleTo(0.8, 300, Easing.Linear);
         }
 
         private async void Frame_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -59,6 +69,20 @@ namespace EmergencyApp
 
             if (e.PropertyName == "IsEnabled" && Frame.Height > 0)
             {
+                if(!string.IsNullOrEmpty(NumberEntry.Text))
+                {
+                    NumberLabel.TranslationY = -20;
+                    NumberLabel.TranslationX = -20;
+                    NumberLabel.Scale = 0.8;
+                }
+
+                if (!string.IsNullOrEmpty(NameEntry.Text))
+                {
+                    NameLabel.TranslationY = -20;
+                    NameLabel.TranslationX = -20;
+                    NameLabel.Scale = 0.8;
+                }
+
                 if (Frame.IsEnabled)
                 {
                     Frame.IsVisible = true;
@@ -72,17 +96,22 @@ namespace EmergencyApp
                     Frame.IsVisible = false;
                 }
             }
-
-        }
-
-        private void Frame_PropertyChanging(object sender, PropertyChangingEventArgs e)
-        {
-            
         }
 
         protected override void OnDetachingFrom(ContentPage bindable)
         {
             base.OnDetachingFrom(bindable);
+            Frame = null;
+            MainStack = null;
+            NameLabel = null;
+            NameEntry = null;
+            NumberLabel = null;
+            NumberEntry = null;
+            NameEntry.Focused -= NameEntry_Focused;
+            NameEntry.Unfocused -= NameEntry_Unfocused;
+            NumberEntry.Focused -= NumberEntry_Focused;
+            NumberEntry.Unfocused -= NumberEntry_Unfocused;
+            Frame.PropertyChanged -= Frame_PropertyChanged;
         }
     }
 }

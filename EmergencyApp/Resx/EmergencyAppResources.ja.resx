@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>約</value>
   </data>
+  <data name="AddRecipient" xml:space="preserve">
+    <value>新しい受信者を追加します</value>
+  </data>
   <data name="AlertMessage" xml:space="preserve">
     <value>言語設定を変更してもよろしいですか？</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="EditHere" xml:space="preserve">
     <value>ここで編集</value>
+  </data>
+  <data name="EditRecipient" xml:space="preserve">
+    <value>受信者を編集する</value>
   </data>
   <data name="EnableGPS" xml:space="preserve">
     <value>GPSを有効にする</value>

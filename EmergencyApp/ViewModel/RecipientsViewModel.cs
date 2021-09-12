@@ -250,7 +250,7 @@ namespace EmergencyApp
                     }
                 }
 
-                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.DeleteContact);
+                DependencyService.Get<IToastMessage>().ShowToast(EmergencyAppResources.RecipientDeleted);
             }
             catch (Exception ex)
             {
@@ -265,7 +265,7 @@ namespace EmergencyApp
             this.RecipientNumber = EditContactDetails.RecipientNumber;
             this.ShowPopup = true;
             this.IsEditPopup = true;
-            PopupTitle = "Edit Contact";
+            PopupTitle = EmergencyAppResources.EditRecipient;
         }
 
         private void BackgroundGestureCommand(object obj)
@@ -273,6 +273,8 @@ namespace EmergencyApp
             ShowPopup = false;
             IsNumberEmpty = false;
             IsNameEmpty = false;
+            this.RecipientName = string.Empty;
+            this.RecipientNumber = string.Empty;
         }
 
         private void DoneCommand(object obj)
@@ -368,7 +370,7 @@ namespace EmergencyApp
         {
             ShowPopup = true;
             IsEditPopup = false;
-            PopupTitle = "Add new contact";
+            PopupTitle = EmergencyAppResources.AddRecipient;
         }
     }
 }

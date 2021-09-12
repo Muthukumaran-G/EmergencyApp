@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>À propos</value>
   </data>
+  <data name="AddRecipient" xml:space="preserve">
+    <value>Ajouter un nouveau destinataire</value>
+  </data>
   <data name="AlertMessage" xml:space="preserve">
     <value>Voulez-vous vraiment modifier les paramètres de langue ?</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="EditHere" xml:space="preserve">
     <value>MODIFIER ICI</value>
+  </data>
+  <data name="EditRecipient" xml:space="preserve">
+    <value>Modifier le destinataire</value>
   </data>
   <data name="EnableGPS" xml:space="preserve">
     <value>Activer le GPS</value>

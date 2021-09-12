@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>കുറിച്ച്</value>
   </data>
+  <data name="AddRecipient" xml:space="preserve">
+    <value>പുതിയ സ്വീകർത്താവിനെ ചേർക്കുക</value>
+  </data>
   <data name="AlertMessage" xml:space="preserve">
     <value>ഭാഷാ ക്രമീകരണങ്ങൾ മാറ്റണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="EditHere" xml:space="preserve">
     <value>ഇവിടെ എഡിറ്റുചെയ്യുക</value>
+  </data>
+  <data name="EditRecipient" xml:space="preserve">
+    <value>സ്വീകർത്താവിനെ എഡിറ്റുചെയ്യുക</value>
   </data>
   <data name="EnableGPS" xml:space="preserve">
     <value>GPS പ്രവർത്തനക്ഷമമാക്കുക</value>

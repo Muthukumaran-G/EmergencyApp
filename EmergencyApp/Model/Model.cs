@@ -8,11 +8,9 @@ namespace EmergencyApp
 {
     public class RecipientModel: NotificationObject
     {
-        public string recipientNumber;
-        public string recipientName;
-        public string userName;
-        public string serial;
-
+        private string recipientNumber;
+        private string recipientName;
+        private string serial;
 
         [PrimaryKey]
         public string Serial
